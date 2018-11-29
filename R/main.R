@@ -7,6 +7,11 @@ main <- function(spek_path = NULL, data_path = NULL) {
   # Read spek
   spek <- read_spek(spek_path)
 
+  # Parse spek
+  # template_md <- parse_template_md(spek)
+  # performers <- parse_performer_md(spek)
+
   # Don't print the return value
   invisible(NULL)
 }
+
