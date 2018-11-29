@@ -1,0 +1,155 @@
+{
+  "@graph" : [ {
+    "@id" : "_:b0",
+    "@type" : "http://schema.org/Organization",
+    "address" : "_:b1"
+  }, {
+    "@id" : "_:b1",
+    "@type" : "http://schema.org/PostalAddress",
+    "addressCountry" : "United States",
+    "addressLocality" : "Ann Arbor",
+    "addressRegion" : "Michigan",
+    "name" : "Example Client",
+    "postalCode" : "48109",
+    "streetAddress" : "903 South Univeristy"
+  }, {
+    "@id" : "http://example.com/app#Alice",
+    "@type" : "http://example.com/slowmo#ascribee",
+    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ]
+  }, {
+    "@id" : "http://example.com/app#Bob",
+    "@type" : "http://example.com/slowmo#ascribee",
+    "RO_0000091" : [ "mastery_present", "positive_trend" ]
+  }, {
+    "@id" : "http://example.com/app#Carol",
+    "@type" : "http://example.com/slowmo#ascribee",
+    "RO_0000091" : "mastery_present"
+  }, {
+    "@id" : "http://example.com/app#EliminateGap",
+    "@type" : "http://example.com/cpo#cpo_0000029"
+  }, {
+    "@id" : "http://example.com/app#example-client",
+    "@type" : "http://example.com/slowmo#slowmo_0000140",
+    "related_location" : "_:b0",
+    "hasCandidate" : [ "http://example.com/app/243c771b81496925dd1baeddd4c7bff7", "http://example.com/app/e3dfa93a31d886318aafd587d90f1e6a", "http://example.com/app/bc313f0be511efbcfaec4e766543edb6", "http://example.com/app/c8cae3bc7a8d6635825e35f9ea59d5e1", "http://example.com/app/925ec1812aeea4f491165499bc74e7d0", "http://example.com/app/1f11539501aab7ee57ac755947c5d916" ],
+    "slowmo_0000001" : [ "http://example.com/app#Bob", "http://example.com/app#Alice", "http://example.com/app#Carol" ],
+    "slowmo_0000002" : "http://example.com/app#EliminateGap",
+    "slowmo_0000003" : [ "https://inferences.es/app/onto#ShowTrendTemplate", "https://example.com/app/onto#ShowGapTemplate" ]
+  }, {
+    "@id" : "http://example.com/app/1f11539501aab7ee57ac755947c5d916",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Alice",
+    "AncestorTemplate" : "https://inferences.es/app/onto#ShowTrendTemplate",
+    "uses_intervention_property" : "show_trend",
+    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ],
+    "name" : "trend figure"
+  }, {
+    "@id" : "http://example.com/app/243c771b81496925dd1baeddd4c7bff7",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Carol",
+    "AncestorTemplate" : "https://inferences.es/app/onto#ShowTrendTemplate",
+    "uses_intervention_property" : "show_trend",
+    "RO_0000091" : "mastery_present",
+    "name" : "trend figure"
+  }, {
+    "@id" : "http://example.com/app/925ec1812aeea4f491165499bc74e7d0",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Bob",
+    "AncestorTemplate" : "https://example.com/app/onto#ShowGapTemplate",
+    "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
+    "RO_0000091" : [ "mastery_present", "positive_trend" ],
+    "name" : "gap figure"
+  }, {
+    "@id" : "http://example.com/app/bc313f0be511efbcfaec4e766543edb6",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Carol",
+    "AncestorTemplate" : "https://example.com/app/onto#ShowGapTemplate",
+    "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
+    "RO_0000091" : "mastery_present",
+    "name" : "gap figure"
+  }, {
+    "@id" : "http://example.com/app/c8cae3bc7a8d6635825e35f9ea59d5e1",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Bob",
+    "AncestorTemplate" : "https://inferences.es/app/onto#ShowTrendTemplate",
+    "acceptable_by" : "http://example.com/app#onward_upward",
+    "promoted_by" : "http://example.com/slowmo#default_esteemer_criteria",
+    "uses_intervention_property" : "show_trend",
+    "RO_0000091" : [ "mastery_present", "positive_trend" ],
+    "name" : "trend figure"
+  }, {
+    "@id" : "http://example.com/app/e3dfa93a31d886318aafd587d90f1e6a",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Alice",
+    "AncestorTemplate" : "https://example.com/app/onto#ShowGapTemplate",
+    "acceptable_by" : "http://example.com/app#eliminate_neg_gap",
+    "promoted_by" : "http://example.com/slowmo#default_esteemer_criteria",
+    "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
+    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ],
+    "name" : "gap figure"
+  } ],
+  "@context" : {
+    "AncestorTemplate" : {
+      "@id" : "http://example.com/slowmo#AncestorTemplate"
+    },
+    "AncestorPerformer" : {
+      "@id" : "http://example.com/slowmo#AncestorPerformer"
+    },
+    "RO_0000091" : {
+      "@id" : "http://purl.obolibrary.org/obo/RO_0000091"
+    },
+    "uses_intervention_property" : {
+      "@id" : "http://example.com/slowmo#uses_intervention_property"
+    },
+    "name" : {
+      "@id" : "http://schema.org/name"
+    },
+    "slowmo_0000002" : {
+      "@id" : "http://example.com/slowmo#slowmo_0000002",
+      "@type" : "@id"
+    },
+    "hasCandidate" : {
+      "@id" : "http://example.com/slowmo#hasCandidate",
+      "@type" : "@id"
+    },
+    "slowmo_0000003" : {
+      "@id" : "http://example.com/slowmo#slowmo_0000003",
+      "@type" : "@id"
+    },
+    "related_location" : {
+      "@id" : "http://example.com/app#related_location",
+      "@type" : "@id"
+    },
+    "slowmo_0000001" : {
+      "@id" : "http://example.com/slowmo#slowmo_0000001",
+      "@type" : "@id"
+    },
+    "address" : {
+      "@id" : "http://schema.org/address",
+      "@type" : "@id"
+    },
+    "promoted_by" : {
+      "@id" : "http://example.com/slowmo#promoted_by",
+      "@type" : "@id"
+    },
+    "acceptable_by" : {
+      "@id" : "http://example.com/slowmo#acceptable_by",
+      "@type" : "@id"
+    },
+    "addressRegion" : {
+      "@id" : "http://schema.org/addressRegion"
+    },
+    "streetAddress" : {
+      "@id" : "http://schema.org/streetAddress"
+    },
+    "addressLocality" : {
+      "@id" : "http://schema.org/addressLocality"
+    },
+    "postalCode" : {
+      "@id" : "http://schema.org/postalCode"
+    },
+    "addressCountry" : {
+      "@id" : "http://schema.org/addressCountry"
+    }
+  }
+}
