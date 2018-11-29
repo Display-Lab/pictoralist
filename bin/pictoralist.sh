@@ -58,8 +58,6 @@ while (( "$#" )); do
   esac
 done
 
-mkdir -p "${OUTPUT_DIR}"
-
 INPUT_ARGS="spek_path=${SPEK_FILE:-NULL}, data_path=${DATA_FILE:-NULL}"
 
 EXPR="pictoralist::main(${INPUT_ARGS})"
