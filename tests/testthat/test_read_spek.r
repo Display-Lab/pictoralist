@@ -15,7 +15,6 @@ JSON_EXAMPLE <- '{
 
 MALFORMED_JSON <- '{ "foo": 4, "bar": 5'
 
-
 test_that("returns a list from a spek", {
   # Mock the resolve spec input function
   stub(read_spek, 'resolve_spek_input', JSON_EXAMPLE )

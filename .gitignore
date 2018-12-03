@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 
+scratch.r
 man/*
