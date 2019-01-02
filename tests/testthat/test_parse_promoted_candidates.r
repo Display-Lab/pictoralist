@@ -1,4 +1,4 @@
-context("Get Promoted Candidates")
+context("Parse Promoted Candidates")
 
 CANDIDATES_NONE_PROMOTED <- list(
     list(
@@ -35,14 +35,14 @@ CANDIDATES_PROMOTED <- list(
 CANDIDATES_MIX <- c(CANDIDATES_NONE_PROMOTED, CANDIDATES_PROMOTED)
 
 test_that("returns empty list when no promoted candidates present.", {
-  res <- get_promoted_candidates(CANDIDATES_NONE_PROMOTED)
+  res <- parse_promoted_candidates(CANDIDATES_NONE_PROMOTED)
 
   expect_length(res, 0)
   expect_type(res, "list")
 })
 
 test_that("returns only promoted candiates from mix of promoted and not.", {
-  res <- get_promoted_candidates(CANDIDATES_MIX)
+  res <- parse_promoted_candidates(CANDIDATES_MIX)
   res_ids <- sapply(res, getElement, "@id")
   promoted_ids <- sapply(CANDIDATES_PROMOTED, getElement, "@id")
 
