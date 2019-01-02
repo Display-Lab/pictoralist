@@ -8,8 +8,15 @@ main <- function(spek_path = NULL, data_path = NULL) {
   spek <- read_spek(spek_path)
 
   # Parse spek
-  # template_md <- parse_template_md(spek)
-  # performers <- parse_performer_md(spek)
+  candidates <- parse_spek_candidates(spek)
+  promoted   <- parse_promoted_candidates(candidates)
+  ascribees <- parse_ascribees(promoted)
+
+  # Read data
+  data <- read_data(data_path)
+
+  # Load templates
+  templates <- load_templates()
 
   # Don't print the return value
   invisible(NULL)
