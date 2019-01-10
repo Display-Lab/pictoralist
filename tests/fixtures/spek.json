@@ -1,10 +1,17 @@
 {
   "@graph" : [ {
     "@id" : "_:b0",
-    "@type" : "http://schema.org/Organization",
-    "address" : "_:b1"
+    "http://example.com/slowmo#guideline" : 10,
+    "title" : "Generic Performance"
   }, {
     "@id" : "_:b1",
+    "use" : "time",
+    "description" : "Time at which performance was measured.",
+    "datatype" : "integer",
+    "http://www.w3.org/ns/csvw#name" : "timepoint",
+    "titles" : "Time"
+  }, {
+    "@id" : "_:b2",
     "@type" : "http://schema.org/PostalAddress",
     "addressCountry" : "United States",
     "addressLocality" : "Ann Arbor",
@@ -12,6 +19,48 @@
     "name" : "Example Client",
     "postalCode" : "48109",
     "streetAddress" : "903 South Univeristy"
+  }, {
+    "@id" : "_:b3",
+    "use" : "identifier",
+    "description" : "Performer unique ID",
+    "datatype" : "string",
+    "http://www.w3.org/ns/csvw#name" : "id",
+    "titles" : "Name"
+  }, {
+    "@id" : "_:b4",
+    "@type" : "http://www.w3.org/ns/csvw#Table",
+    "title" : "Mock Performance Data",
+    "dialect" : "_:b6",
+    "tableSchema" : "_:b7"
+  }, {
+    "@id" : "_:b5",
+    "@type" : "http://schema.org/Organization",
+    "address" : "_:b2"
+  }, {
+    "@id" : "_:b6",
+    "commentPrefix" : "",
+    "delimiter" : ",",
+    "http://www.w3.org/ns/csvw#doubleQuote" : true,
+    "encoding" : "utf-8",
+    "http://www.w3.org/ns/csvw#header" : true,
+    "headerRowCount" : "1",
+    "lineTerminators" : "\\n",
+    "quoteChar" : "\"",
+    "http://www.w3.org/ns/csvw#skipBlankRows" : true,
+    "http://www.w3.org/ns/csvw#skipColumns" : 0,
+    "http://www.w3.org/ns/csvw#skipInitialSpace" : false,
+    "skipRows" : "",
+    "http://www.w3.org/ns/csvw#trim" : false
+  }, {
+    "@id" : "_:b7",
+    "columns" : [ "_:b1", "_:b3", "_:b8" ]
+  }, {
+    "@id" : "_:b8",
+    "use" : "value",
+    "description" : "Demonstration performance value",
+    "datatype" : "integer",
+    "http://www.w3.org/ns/csvw#name" : "performance",
+    "titles" : "Performance"
   }, {
     "@id" : "http://example.com/app#Alice",
     "@type" : "http://example.com/slowmo#ascribee",
@@ -30,8 +79,10 @@
   }, {
     "@id" : "http://example.com/app#example-client",
     "@type" : "http://example.com/slowmo#slowmo_0000140",
-    "related_location" : "_:b0",
+    "related_location" : "_:b5",
     "hasCandidate" : [ "http://example.com/app/243c771b81496925dd1baeddd4c7bff7", "http://example.com/app/e3dfa93a31d886318aafd587d90f1e6a", "http://example.com/app/bc313f0be511efbcfaec4e766543edb6", "http://example.com/app/c8cae3bc7a8d6635825e35f9ea59d5e1", "http://example.com/app/925ec1812aeea4f491165499bc74e7d0", "http://example.com/app/1f11539501aab7ee57ac755947c5d916" ],
+    "input_table" : "_:b4",
+    "measure" : "_:b0",
     "slowmo_0000001" : [ "http://example.com/app#Bob", "http://example.com/app#Alice", "http://example.com/app#Carol" ],
     "slowmo_0000002" : "http://example.com/app#EliminateGap",
     "slowmo_0000003" : [ "https://inferences.es/app/onto#ShowTrendTemplate", "https://example.com/app/onto#ShowGapTemplate" ]
@@ -104,37 +155,24 @@
     "name" : {
       "@id" : "http://schema.org/name"
     },
-    "slowmo_0000002" : {
-      "@id" : "http://example.com/slowmo#slowmo_0000002",
-      "@type" : "@id"
+    "guideline" : {
+      "@id" : "http://example.com/slowmo#guideline",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
     },
-    "hasCandidate" : {
-      "@id" : "http://example.com/slowmo#hasCandidate",
-      "@type" : "@id"
+    "title" : {
+      "@id" : "http://purl.org/dc/terms/title"
     },
-    "slowmo_0000003" : {
-      "@id" : "http://example.com/slowmo#slowmo_0000003",
-      "@type" : "@id"
+    "use" : {
+      "@id" : "http://example.com/slowmo#use"
     },
-    "related_location" : {
-      "@id" : "http://example.com/app#related_location",
-      "@type" : "@id"
+    "titles" : {
+      "@id" : "http://www.w3.org/ns/csvw#titles"
     },
-    "slowmo_0000001" : {
-      "@id" : "http://example.com/slowmo#slowmo_0000001",
-      "@type" : "@id"
+    "datatype" : {
+      "@id" : "http://www.w3.org/ns/csvw#datatype"
     },
-    "address" : {
-      "@id" : "http://schema.org/address",
-      "@type" : "@id"
-    },
-    "promoted_by" : {
-      "@id" : "http://example.com/slowmo#promoted_by",
-      "@type" : "@id"
-    },
-    "acceptable_by" : {
-      "@id" : "http://example.com/slowmo#acceptable_by",
-      "@type" : "@id"
+    "description" : {
+      "@id" : "http://purl.org/dc/terms/description"
     },
     "addressRegion" : {
       "@id" : "http://schema.org/addressRegion"
@@ -150,6 +188,103 @@
     },
     "addressCountry" : {
       "@id" : "http://schema.org/addressCountry"
+    },
+    "slowmo_0000002" : {
+      "@id" : "http://example.com/slowmo#slowmo_0000002",
+      "@type" : "@id"
+    },
+    "measure" : {
+      "@id" : "http://example.com/slowmo#measure",
+      "@type" : "@id"
+    },
+    "hasCandidate" : {
+      "@id" : "http://example.com/slowmo#hasCandidate",
+      "@type" : "@id"
+    },
+    "input_table" : {
+      "@id" : "http://example.com/slowmo#input_table",
+      "@type" : "@id"
+    },
+    "slowmo_0000003" : {
+      "@id" : "http://example.com/slowmo#slowmo_0000003",
+      "@type" : "@id"
+    },
+    "related_location" : {
+      "@id" : "http://example.com/app#related_location",
+      "@type" : "@id"
+    },
+    "slowmo_0000001" : {
+      "@id" : "http://example.com/slowmo#slowmo_0000001",
+      "@type" : "@id"
+    },
+    "promoted_by" : {
+      "@id" : "http://example.com/slowmo#promoted_by",
+      "@type" : "@id"
+    },
+    "acceptable_by" : {
+      "@id" : "http://example.com/slowmo#acceptable_by",
+      "@type" : "@id"
+    },
+    "skipBlankRows" : {
+      "@id" : "http://www.w3.org/ns/csvw#skipBlankRows",
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "encoding" : {
+      "@id" : "http://www.w3.org/ns/csvw#encoding"
+    },
+    "delimiter" : {
+      "@id" : "http://www.w3.org/ns/csvw#delimiter"
+    },
+    "skipColumns" : {
+      "@id" : "http://www.w3.org/ns/csvw#skipColumns",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "headerRowCount" : {
+      "@id" : "http://www.w3.org/ns/csvw#headerRowCount"
+    },
+    "commentPrefix" : {
+      "@id" : "http://www.w3.org/ns/csvw#commentPrefix"
+    },
+    "header" : {
+      "@id" : "http://www.w3.org/ns/csvw#header",
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "doubleQuote" : {
+      "@id" : "http://www.w3.org/ns/csvw#doubleQuote",
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "trim" : {
+      "@id" : "http://www.w3.org/ns/csvw#trim",
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "quoteChar" : {
+      "@id" : "http://www.w3.org/ns/csvw#quoteChar"
+    },
+    "lineTerminators" : {
+      "@id" : "http://www.w3.org/ns/csvw#lineTerminators"
+    },
+    "skipInitialSpace" : {
+      "@id" : "http://www.w3.org/ns/csvw#skipInitialSpace",
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "skipRows" : {
+      "@id" : "http://www.w3.org/ns/csvw#skipRows"
+    },
+    "tableSchema" : {
+      "@id" : "http://www.w3.org/ns/csvw#tableSchema",
+      "@type" : "@id"
+    },
+    "dialect" : {
+      "@id" : "http://www.w3.org/ns/csvw#dialect",
+      "@type" : "@id"
+    },
+    "address" : {
+      "@id" : "http://schema.org/address",
+      "@type" : "@id"
+    },
+    "columns" : {
+      "@id" : "http://www.w3.org/ns/csvw#columns",
+      "@type" : "@id"
     }
   }
 }

@@ -12,6 +12,8 @@ main <- function(spek_path = NULL, data_path = NULL) {
   promoted   <- parse_promoted_candidates(candidates)
   ascribees <- parse_ascribees(promoted)
 
+  table_spec <- parse_table_spec(spek)
+
   # Read data
   data <- read_data(data_path)
 
