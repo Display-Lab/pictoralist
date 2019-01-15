@@ -1,53 +1,41 @@
 {
   "@graph" : [ {
     "@id" : "_:b0",
-    "columns" : [ "_:b1", "_:b2", "_:b3" ]
+    "http://example.com/slowmo#guideline" : 10,
+    "title" : "Generic Performance"
   }, {
     "@id" : "_:b1",
-    "use" : "identifier",
-    "description" : "Performer unique ID",
-    "datatype" : "string",
-    "http://www.w3.org/ns/csvw#name" : "id",
-    "titles" : "Name"
-  }, {
-    "@id" : "_:b2",
     "use" : "value",
     "description" : "Demonstration performance value",
     "datatype" : "integer",
     "http://www.w3.org/ns/csvw#name" : "performance",
     "titles" : "Performance"
   }, {
-    "@id" : "_:b3",
+    "@id" : "_:b2",
     "use" : "time",
     "description" : "Time at which performance was measured.",
     "datatype" : "integer",
     "http://www.w3.org/ns/csvw#name" : "timepoint",
     "titles" : "Time"
   }, {
-    "@id" : "_:b4",
-    "http://example.com/slowmo#guideline" : 10,
-    "title" : "Generic Performance"
+    "@id" : "_:b3",
+    "use" : "identifier",
+    "description" : "Performer unique ID",
+    "datatype" : "string",
+    "http://www.w3.org/ns/csvw#name" : "id",
+    "titles" : "Name"
   }, {
-    "@id" : "_:b5",
+    "@id" : "_:b4",
     "@type" : "http://www.w3.org/ns/csvw#Table",
     "title" : "Mock Performance Data",
-    "dialect" : "_:b8",
-    "tableSchema" : "_:b0"
+    "dialect" : "_:b6",
+    "tableSchema" : "_:b8"
   }, {
-    "@id" : "_:b6",
+    "@id" : "_:b5",
     "@type" : "http://schema.org/Organization",
     "address" : "_:b7"
   }, {
-    "@id" : "_:b7",
-    "@type" : "http://schema.org/PostalAddress",
-    "addressCountry" : "United States",
-    "addressLocality" : "Ann Arbor",
-    "addressRegion" : "Michigan",
-    "name" : "Example Client",
-    "postalCode" : "48109",
-    "streetAddress" : "903 South Univeristy"
-  }, {
-    "@id" : "_:b8",
+    "@id" : "_:b6",
     "commentPrefix" : "",
     "delimiter" : ",",
     "http://www.w3.org/ns/csvw#doubleQuote" : true,
@@ -62,29 +50,61 @@
     "skipRows" : "",
     "http://www.w3.org/ns/csvw#trim" : false
   }, {
-    "@id" : "http://example.com/app#0c4ae0b3c5a8eee1a71e471f2ceeea98",
-    "@type" : "http://example.com/cpo#cpo_0000053",
-    "AncestorPerformer" : "http://example.com/app#Alice",
-    "AncestorTemplate" : "https://example.com/app#ShowTrendTemplate",
-    "uses_intervention_property" : "show_trend",
-    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ],
-    "name" : "trend figure"
+    "@id" : "_:b7",
+    "@type" : "http://schema.org/PostalAddress",
+    "addressCountry" : "United States",
+    "addressLocality" : "Ann Arbor",
+    "addressRegion" : "Michigan",
+    "name" : "Example Client",
+    "postalCode" : "48109",
+    "streetAddress" : "903 South Univeristy"
   }, {
-    "@id" : "http://example.com/app#39161c7dd85e19b80db23ca242c29649",
+    "@id" : "_:b8",
+    "columns" : [ "_:b1", "_:b2", "_:b3" ]
+  }, {
+    "@id" : "http://example.com/app#39c1b9179d797ec609512dcdd31f3ee1",
     "@type" : "http://example.com/cpo#cpo_0000053",
     "AncestorPerformer" : "http://example.com/app#Bob",
-    "AncestorTemplate" : "https://example.com/app#ShowGapTemplate",
+    "AncestorTemplate" : "http://example.com/app#ShowGapTemplate",
     "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
     "RO_0000091" : [ "mastery_present", "positive_trend" ],
     "name" : "gap figure"
   }, {
-    "@id" : "http://example.com/app#6ece5c291d3636984b7679a0d9c8fc04",
+    "@id" : "http://example.com/app#65f1e3d1d0d181738910cd077654e565",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Alice",
+    "AncestorTemplate" : "http://example.com/app#ShowTrendTemplate",
+    "uses_intervention_property" : "show_trend",
+    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ],
+    "name" : "trend figure"
+  }, {
+    "@id" : "http://example.com/app#6acc44bbc1bdc91b75459013d3d0e195",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Alice",
+    "AncestorTemplate" : "http://example.com/app#ShowGapTemplate",
+    "acceptable_by" : "http://example.com/app#eliminate_neg_gap",
+    "promoted_by" : "http://example.com/slowmo#default_esteemer_criteria",
+    "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
+    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ],
+    "name" : "gap figure"
+  }, {
+    "@id" : "http://example.com/app#76122eecee9ff6deaf6c8cd03af2b3c1",
+    "@type" : "http://example.com/cpo#cpo_0000053",
+    "AncestorPerformer" : "http://example.com/app#Bob",
+    "AncestorTemplate" : "http://example.com/app#ShowTrendTemplate",
+    "acceptable_by" : "http://example.com/app#onward_upward",
+    "promoted_by" : "http://example.com/slowmo#default_esteemer_criteria",
+    "uses_intervention_property" : "show_trend",
+    "RO_0000091" : [ "mastery_present", "positive_trend" ],
+    "name" : "trend figure"
+  }, {
+    "@id" : "http://example.com/app#99b0f12ab7c3fce7ca65ae21f2e14a89",
     "@type" : "http://example.com/cpo#cpo_0000053",
     "AncestorPerformer" : "http://example.com/app#Carol",
-    "AncestorTemplate" : "https://example.com/app#ShowGapTemplate",
-    "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
+    "AncestorTemplate" : "http://example.com/app#ShowTrendTemplate",
+    "uses_intervention_property" : "show_trend",
     "RO_0000091" : "mastery_present",
-    "name" : "gap figure"
+    "name" : "trend figure"
   }, {
     "@id" : "http://example.com/app#Alice",
     "@type" : "http://example.com/slowmo#ascribee",
@@ -101,51 +121,34 @@
     "@id" : "http://example.com/app#EliminateGap",
     "@type" : "http://example.com/cpo#cpo_0000029"
   }, {
-    "@id" : "http://example.com/app#a4843efba212a56b574b11e7eca0cd2e",
+    "@id" : "http://example.com/app#a12441c50edfe1f8bd84db8bd0bf8427",
     "@type" : "http://example.com/cpo#cpo_0000053",
-    "AncestorPerformer" : "http://example.com/app#Bob",
-    "AncestorTemplate" : "https://example.com/app#ShowTrendTemplate",
-    "acceptable_by" : "http://example.com/app#onward_upward",
-    "promoted_by" : "http://example.com/slowmo#default_esteemer_criteria",
-    "uses_intervention_property" : "show_trend",
-    "RO_0000091" : [ "mastery_present", "positive_trend" ],
-    "name" : "trend figure"
-  }, {
-    "@id" : "http://example.com/app#deeff34e751813c105485f62b4ec4509",
-    "@type" : "http://example.com/cpo#cpo_0000053",
-    "AncestorPerformer" : "http://example.com/app#Alice",
-    "AncestorTemplate" : "https://example.com/app#ShowGapTemplate",
-    "acceptable_by" : "http://example.com/app#eliminate_neg_gap",
-    "promoted_by" : "http://example.com/slowmo#default_esteemer_criteria",
+    "AncestorPerformer" : "http://example.com/app#Carol",
+    "AncestorTemplate" : "http://example.com/app#ShowGapTemplate",
     "uses_intervention_property" : [ "normative_comparator", "peer_comparison" ],
-    "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ],
+    "RO_0000091" : "mastery_present",
     "name" : "gap figure"
   }, {
     "@id" : "http://example.com/app#example-client",
     "@type" : "http://example.com/slowmo#slowmo_0000140",
-    "related_location" : "_:b6",
-    "hasCandidate" : [ "http://example.com/app#deeff34e751813c105485f62b4ec4509", "http://example.com/app#6ece5c291d3636984b7679a0d9c8fc04", "http://example.com/app#a4843efba212a56b574b11e7eca0cd2e", "http://example.com/app#39161c7dd85e19b80db23ca242c29649", "http://example.com/app#f85b5271b4262b2cf60ff178f4020a2c", "http://example.com/app#0c4ae0b3c5a8eee1a71e471f2ceeea98" ],
-    "input_table" : "_:b5",
-    "measure" : "_:b4",
+    "related_location" : "_:b5",
+    "hasCandidate" : [ "http://example.com/app#a12441c50edfe1f8bd84db8bd0bf8427", "http://example.com/app#39c1b9179d797ec609512dcdd31f3ee1", "http://example.com/app#6acc44bbc1bdc91b75459013d3d0e195", "http://example.com/app#65f1e3d1d0d181738910cd077654e565", "http://example.com/app#76122eecee9ff6deaf6c8cd03af2b3c1", "http://example.com/app#99b0f12ab7c3fce7ca65ae21f2e14a89" ],
+    "input_table" : "_:b4",
+    "measure" : "_:b0",
     "slowmo_0000001" : [ "http://example.com/app#Bob", "http://example.com/app#Alice", "http://example.com/app#Carol" ],
     "slowmo_0000002" : "http://example.com/app#EliminateGap",
-    "slowmo_0000003" : [ "https://example.com/app#ShowGapTemplate", "https://example.com/app#ShowTrendTemplate" ]
-  }, {
-    "@id" : "http://example.com/app#f85b5271b4262b2cf60ff178f4020a2c",
-    "@type" : "http://example.com/cpo#cpo_0000053",
-    "AncestorPerformer" : "http://example.com/app#Carol",
-    "AncestorTemplate" : "https://example.com/app#ShowTrendTemplate",
-    "uses_intervention_property" : "show_trend",
-    "RO_0000091" : "mastery_present",
-    "name" : "trend figure"
+    "slowmo_0000003" : [ "http://example.com/app#ShowGapTemplate", "http://example.com/app#ShowTrendTemplate" ]
   } ],
   "@context" : {
+    "guideline" : {
+      "@id" : "http://example.com/slowmo#guideline",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "title" : {
+      "@id" : "http://purl.org/dc/terms/title"
+    },
     "AncestorTemplate" : {
       "@id" : "http://example.com/slowmo#AncestorTemplate"
-    },
-    "promoted_by" : {
-      "@id" : "http://example.com/slowmo#promoted_by",
-      "@type" : "@id"
     },
     "AncestorPerformer" : {
       "@id" : "http://example.com/slowmo#AncestorPerformer"
@@ -153,19 +156,11 @@
     "RO_0000091" : {
       "@id" : "http://purl.obolibrary.org/obo/RO_0000091"
     },
-    "acceptable_by" : {
-      "@id" : "http://example.com/slowmo#acceptable_by",
-      "@type" : "@id"
-    },
     "uses_intervention_property" : {
       "@id" : "http://example.com/slowmo#uses_intervention_property"
     },
     "name" : {
       "@id" : "http://schema.org/name"
-    },
-    "columns" : {
-      "@id" : "http://www.w3.org/ns/csvw#columns",
-      "@type" : "@id"
     },
     "use" : {
       "@id" : "http://example.com/slowmo#use"
@@ -178,6 +173,14 @@
     },
     "description" : {
       "@id" : "http://purl.org/dc/terms/description"
+    },
+    "promoted_by" : {
+      "@id" : "http://example.com/slowmo#promoted_by",
+      "@type" : "@id"
+    },
+    "acceptable_by" : {
+      "@id" : "http://example.com/slowmo#acceptable_by",
+      "@type" : "@id"
     },
     "slowmo_0000002" : {
       "@id" : "http://example.com/slowmo#slowmo_0000002",
@@ -205,10 +208,6 @@
     },
     "slowmo_0000001" : {
       "@id" : "http://example.com/slowmo#slowmo_0000001",
-      "@type" : "@id"
-    },
-    "address" : {
-      "@id" : "http://schema.org/address",
       "@type" : "@id"
     },
     "skipBlankRows" : {
@@ -256,21 +255,6 @@
     "skipRows" : {
       "@id" : "http://www.w3.org/ns/csvw#skipRows"
     },
-    "title" : {
-      "@id" : "http://purl.org/dc/terms/title"
-    },
-    "tableSchema" : {
-      "@id" : "http://www.w3.org/ns/csvw#tableSchema",
-      "@type" : "@id"
-    },
-    "dialect" : {
-      "@id" : "http://www.w3.org/ns/csvw#dialect",
-      "@type" : "@id"
-    },
-    "guideline" : {
-      "@id" : "http://example.com/slowmo#guideline",
-      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
-    },
     "addressRegion" : {
       "@id" : "http://schema.org/addressRegion"
     },
@@ -285,6 +269,22 @@
     },
     "addressCountry" : {
       "@id" : "http://schema.org/addressCountry"
+    },
+    "columns" : {
+      "@id" : "http://www.w3.org/ns/csvw#columns",
+      "@type" : "@id"
+    },
+    "tableSchema" : {
+      "@id" : "http://www.w3.org/ns/csvw#tableSchema",
+      "@type" : "@id"
+    },
+    "dialect" : {
+      "@id" : "http://www.w3.org/ns/csvw#dialect",
+      "@type" : "@id"
+    },
+    "address" : {
+      "@id" : "http://schema.org/address",
+      "@type" : "@id"
     }
   }
 }
