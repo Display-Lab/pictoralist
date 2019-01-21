@@ -4,27 +4,28 @@ library(dplyr)
 
 run <- function(recip, data, table_spec){
   plot_data <- make_plot_data(recip, data, table_spec)
-  make_plot(recip, plot_data)
+  make_plot(recip, plot_data, table_spec)
 }
 
 make_plot_data <- function(recip, data, table_spec){
-  # What is the colname of the time?
-  time_colname <- first(use_colnames(table_spec, 'time'))
-  print(time_colname)
-  # What is the colname of the value?
-  value_colname <- first(use_colnames(table_spec, 'value'))
-  print(value_colname)
-  # What is the identifier column name
-  id_colname <- first(use_colnames(table_spec, 'identifier'))
-  print(id_colname)
-
-  browser()
   # Trim data to recipient
-  data %>% filter(id==recip)
+  id_colname <- first(use_colnames(table_spec, 'identifier'))
+  data %>% filter_at(.vars=id_colname, .vars_predicate = all_vars(.== recip))
 }
 
-make_plot <- function(recip, plot_data){
-  ggplot(plot_data, aes(x=timepoint,y=performance)) + geom_line()
+make_plot <- function(recip, plot_data, table_spec){
+  # Symbolize column names
+  time_colname <- first(use_colnames(table_spec, 'time'))
+  value_colname <- first(use_colnames(table_spec, 'value'))
+  sx <- sym(time_colname)
+  sy <- sym(value_colname)
+
+  ggplot(plot_data, aes(x=!!sx,y=!!sy)) + geom_line() + display_lab_base_theme()
+}
+
+display_lab_base_theme <- function(){
+  theme_classic()
+
 }
 
 use_colnames <- function(spec, use){

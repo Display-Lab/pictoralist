@@ -20,6 +20,9 @@ main <- function(spek_path = NULL, data_path = NULL) {
   # Load templates
   templates <- load_templates()
 
+  # Produce plots
+  figures <- produce_plots(promoted, templates, data, table_spec)
+
   # Don't print the return value
   invisible(NULL)
 }
