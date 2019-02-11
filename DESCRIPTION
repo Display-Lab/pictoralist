@@ -11,3 +11,6 @@ Suggests:
   testthat,
   mockery
 RoxygenNote: 6.1.0
+Imports: jsonld,
+  jsonlite,
+  readr
