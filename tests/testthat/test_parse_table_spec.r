@@ -12,13 +12,13 @@ OTHER_NODES <- list(
     `http://purl.org/dc/terms/description` = list(list(`@value` = "Time at which performance was measured.")),
     `http://www.w3.org/ns/csvw#name` = list(list(`@value` = "timepoint")),
     `http://www.w3.org/ns/csvw#titles` = list(list(`@value` = "Time")),
-    `http://example.com/slowmo#use` = list(list(`@value` = "time"))),
+    `http://example.com/slowmo#ColumnUse` = list(list(`@value` = "time"))),
   list(`@id` = "_:b3",
     `http://www.w3.org/ns/csvw#datatype` = list( list(`@value` = "string")),
     `http://purl.org/dc/terms/description` = list( list(`@value` = "Performer unique ID")),
     `http://www.w3.org/ns/csvw#name` = list( list(`@value` = "id")),
     `http://www.w3.org/ns/csvw#titles` = list( list(`@value` = "Name")),
-    `http://example.com/slowmo#use` = list( list(`@value` = "identifier"))),
+    `http://example.com/slowmo#ColumnUse` = list( list(`@value` = "identifier"))),
   list(`@id` = "_:b7",
     `http://www.w3.org/ns/csvw#columns` = list( list(`@id` = "_:b1"),
                                                 list(`@id` = "_:b3"),
@@ -28,7 +28,7 @@ OTHER_NODES <- list(
     `http://purl.org/dc/terms/description` = list( list(`@value` = "Demonstration performance value")),
     `http://www.w3.org/ns/csvw#name` = list(list(`@value` = "performance")),
     `http://www.w3.org/ns/csvw#titles` = list(list(`@value` = "Performance")),
-    `http://example.com/slowmo#use` = list(list(`@value` = "value")))
+    `http://example.com/slowmo#ColumnUse` = list(list(`@value` = "value")))
 )
 
 test_that("All column specs are available.",{

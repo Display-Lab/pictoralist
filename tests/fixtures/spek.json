@@ -2,7 +2,7 @@
   "@graph": [
     {
       "@id": "_:b0",
-      "use": "time",
+      "ColumnUse": "time",
       "description": "Time at which performance was measured.",
       "datatype": "integer",
       "name": "timepoint",
@@ -18,7 +18,7 @@
     },
     {
       "@id": "_:b2",
-      "use": "value",
+      "ColumnUse": "value",
       "description": "Demonstration performance value",
       "datatype": "integer",
       "name": "performance",
@@ -26,7 +26,7 @@
     },
     {
       "@id": "_:b3",
-      "use": "identifier",
+      "ColumnUse": "identifier",
       "description": "Performer unique ID",
       "datatype": "string",
       "name": "performer",
@@ -212,8 +212,8 @@
     }
   ],
   "@context": {
-    "use": {
-      "@id": "http://example.com/slowmo#use"
+    "ColumnUse": {
+      "@id": "http://example.com/slowmo#ColumnUse"
     },
     "titles": {
       "@id": "http://www.w3.org/ns/csvw#titles"
