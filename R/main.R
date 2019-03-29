@@ -2,6 +2,8 @@
 #' @description The application entry function with all the side effects.
 #' @param spek_path Path to spek json. Use NULL to indicate read from stdin
 #' @param data_path Path to performance data.
+#' @importFrom extrafont loadfonts
+#' @importFrom extrafont font_import
 #' @export
 main <- function(spek_path = NULL, data_path = NULL) {
   # Read spek
@@ -19,6 +21,10 @@ main <- function(spek_path = NULL, data_path = NULL) {
 
   # Load templates
   templates <- load_templates()
+
+  # Load fonts
+  extrafont::font_import(paths=system.file("montserrat",package="pictoralist"), prompt=FALSE)
+  extrafont::loadfonts(device = "postscript", quiet=T)
 
   # Produce plots
   figures <- produce_plots(promoted, templates, data, table_spec)
