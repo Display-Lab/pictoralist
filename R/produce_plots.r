@@ -2,22 +2,25 @@
 #' @description Produce the ggplots for the promoted candidates.
 #' @param promoted List of promoted candidates.
 #' @param data Performance data.
-#' @param table_spec Table specification.
+#' @param spek List representation of client spek.
+#' @param templates List of template environments. Each should have name attribute and run() function
 #' @return List of ggplots
 #' @export
-produce_plots <- function(promoted, templates, data, table_spec){
+produce_plots <- function(promoted, templates, data, spek){
   # Strip recipient id and template id from promoted candidates
   p_ids <- lapply(promoted, FUN=`strip_performer_id`)
   t_envs <- lapply(promoted, FUN=`lookup_template`, templates=templates)
 
-  result <- mapply(FUN=`run_template`, p_ids, t_envs, MoreArgs = list(data=data, spec=table_spec), SIMPLIFY = F)
+  result <- mapply(FUN=`run_template`, p_ids, t_envs,
+                   MoreArgs = list(data=data, spek=spek), SIMPLIFY = F)
   return(result)
 }
 
 #' @title Run Template
+#' @param p_id performer id.  Passed to template as recipient.
 #' @description Generate ggplot from data for the recipient
-run_template <- function(p_id, t_env, data, spec){
-  result <- t_env$run(p_id, data, spec)
+run_template <- function(p_id, t_env, data, spek){
+  result <- t_env$run(p_id, data, spek)
   return(result)
 }
 
@@ -37,5 +40,3 @@ lookup_template <- function(x, templates){
   t_id <- sub(PT$APP_BASE_URI,"", value)
   getElement(templates, t_id)
 }
-
-
