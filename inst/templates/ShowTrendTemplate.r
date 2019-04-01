@@ -8,24 +8,17 @@ DL_BLUE <- "#00274C"
 DL_FILL <- "#FFFFFF"
 
 # Entry point that Pictoralist will call
-run <- function(recip, data, table_spec){
-  plot_data <- make_plot_data(recip, data, table_spec)
-  make_plot(recip, plot_data, table_spec)
+run <- function(recipient, data, spek){
+  plot_data <- make_plot_data(recipient, data, spek)
+  make_plot(recipient, plot_data, spek)
 }
 
 #--Supporting functions--------------------------------------------------------#
 
-make_plot_data <- function(recip, data, table_spec){
+make_plot_data <- function(recip, data, spek){
   # Trim data to recipient
-  id_colname <- first(use_colnames(table_spec, 'identifier'))
-  data %>% filter_at(.vars=id_colname, .vars_predicate = all_vars(.== recip))
-}
-
-make_plot <- function(recip, plot_data, table_spec){
-  # Symbolize column names
-  time_colname <- first(use_colnames(table_spec, 'time'))
-  value_colname <- first(use_colnames(table_spec, 'value'))
-  sx <- sym(time_colname)
+  # TODO: issue13:
+  #  id_colname <- pictoralist::extract
   sy <- sym(value_colname)
 
   # Get measure goal if available

@@ -12,9 +12,6 @@ main <- function(spek_path = NULL, data_path = NULL) {
   # Parse spek
   candidates <- parse_spek_candidates(spek)
   promoted   <- parse_promoted_candidates(candidates)
-  ascribees <- parse_ascribees(promoted)
-
-  table_spec <- parse_table_spec(spek)
 
   # Read data
   data <- read_data(data_path)
@@ -27,7 +24,9 @@ main <- function(spek_path = NULL, data_path = NULL) {
   extrafont::loadfonts(device = "postscript", quiet=T)
 
   # Produce plots
-  figures <- produce_plots(promoted, templates, data, table_spec)
+  figures <- produce_plots(promoted, templates, data, spek)
+
+  # Write plots to disk. TODO: issue12
 
   # Don't print the return value
   invisible(NULL)
