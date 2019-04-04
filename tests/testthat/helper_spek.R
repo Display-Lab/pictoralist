@@ -13,7 +13,7 @@ accept_and_promote_candidate <- function(spek, index){
 gen_va_gocc_spek <- function(){
   list(
     `@id` = "http://example.com/app#example-client",
-    `@type` = "http://example.com/slowmo#slowmo_0000140",
+    `@type` = "http://example.com/slowmo#spek",
     `http://example.com/app#related_location` = list( list(
         `@type` = "http://schema.org/Organization",
         `http://schema.org/address` = list( list(
@@ -25,96 +25,96 @@ gen_va_gocc_spek <- function(){
             `http://schema.org/postalCode` = list(list(`@value` = "20420")),
             `http://schema.org/streetAddress` = list(list(`@value` = "810 Vermont Avenue"))
           ) ) ) ),
-    `http://example.com/slowmo#slowmo_0000001` = list( list(
+    `http://example.com/slowmo#IsAboutPerformer` = list( list(
         `@id` = "http://example.com/app#4369AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Miles City Community Living Center")) ),
       list(
         `@id` = "http://example.com/app#4609AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Wilmington")) ),
       list(
         `@id` = "http://example.com/app#5039AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Altoona - James E. Van Zandt VA Medical Center")) ),
       list(
         `@id` = "http://example.com/app#5129AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "VA Maryland HCS Baltimore Loch Raven")) ),
       list(
         `@id` = "http://example.com/app#5299AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "VA Butler Healthcare")) ),
       list(
         `@id` = "http://example.com/app#5429AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Coatesville VAMC")) ),
       list(
         `@id` = "http://example.com/app#5509AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "VA Illiana HCS")) ),
       list(
         `@id` = "http://example.com/app#5539AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "John D. Dingell VAMC")) ),
       list(
         `@id` = "http://example.com/app#5549AB",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Eastern Colorado HCS - Pueblo")) ),
       list(
         `@id` = "http://example.com/app#5569AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Captain James A Lovell FHCC")) ),
       list(
         `@id` = "http://example.com/app#5689AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "VA Black Hills - Fort Meade")) ),
       list(
         `@id` = "http://example.com/app#5689AB",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "VA Black Hills - Hot Springs")) ),
       list(
         `@id` = "http://example.com/app#5759AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Grand Junction VAMC")) ),
       list(
         `@id` = "http://example.com/app#5959AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Lebanon VAMC")) ),
       list(
         `@id` = "http://example.com/app#6079AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Madison VA")) ),
       list(
         `@id` = "http://example.com/app#6109AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "VA Northern Indiana HCS - Marion")) ),
       list(
         `@id` = "http://example.com/app#6309AB",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "St. Albans Campus of the VA NY Harbor Healthcare System")) ),
       list(
         `@id` = "http://example.com/app#6359AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Oklahoma City VAMC")) ),
       list(
         `@id` = "http://example.com/app#6429AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Philadelphia VAMC")) ),
       list(
         `@id` = "http://example.com/app#6559AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Aleda E. Lutz VAMC")) ),
       list(
         `@id` = "http://example.com/app#6669AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Sheridan VA Medical Center")) ),
       list(
         `@id` = "http://example.com/app#6939AA",
-        `@type` = "http://example.com/slowmo#ascribee",
+        `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
         `http://schema.org/name` = list(list(`@value` = "Wilkes-Barre VAMC")) )
     ),
-    `http://example.com/slowmo#input_table` = list( list(
+    `http://example.com/slowmo#InputTable` = list( list(
         `@type` = "http://www.w3.org/ns/csvw#Table",
         `http://www.w3.org/ns/csvw#dialect` = list( list(
             `http://www.w3.org/ns/csvw#delimiter` = list(list(`@value` = ",")),
@@ -168,10 +168,10 @@ gen_va_gocc_spek <- function(){
         )
       )
     ),
-    `http://example.com/slowmo#measure` = list(list(
+    `http://example.com/slowmo#Measure` = list(list(
       `http://purl.org/dc/terms/title` = list(list(`@value` = "Completed LST Template Documentation"))
     )),
-    `http://example.com/slowmo#slowmo_0000002` = list(
+    `http://example.com/slowmo#IsAboutCausalPathway` = list(
       list(`@id` = "http://example.com/app#EliminateGap",
            `@type` = "http://example.com/cpo#cpo_0000029")
     ),
@@ -187,7 +187,7 @@ gen_va_gocc_spek <- function(){
 gen_mtx_behavior_spek <- function(){
   list(
     `@id` = "http://example.com/app#nhs-example",
-    `@type` = "http://example.com/slowmo#slowmo_0000140",
+    `@type` = "http://example.com/slowmo#spek",
     `http://example.com/app#related_location` = list( list(
         `@type` = "http://schema.org/Organization",
         `http://schema.org/address` = list( list(
@@ -196,7 +196,7 @@ gen_mtx_behavior_spek <- function(){
             `http://schema.org/name` = list(list(`@value` = "NHS General Practitioners"))
           ) ) )
     ),
-    `http://example.com/slowmo#input_table` = list( list(
+    `http://example.com/slowmo#InputTable` = list( list(
         `@type` = "http://www.w3.org/ns/csvw#Table",
         `http://www.w3.org/ns/csvw#dialect` = list( list(
             `http://www.w3.org/ns/csvw#delimiter` = list(list(`@value` = ",")),
@@ -247,7 +247,7 @@ gen_mtx_behavior_spek <- function(){
         `http://purl.org/dc/terms/title` = list(list(`@value` = "High dose MTX perscribing."))
       )
     ),
-    `http://example.com/slowmo#measure` = list( list(
+    `http://example.com/slowmo#Measure` = list( list(
         `http://purl.org/dc/terms/title` = list(list(`@value` = "High Dose MethoTrexate Perscribing")),
         `http://example.com/slowmo#goal` = list(list(`@value` = "http://example/com/slomo#achievable_benchmark")
         ) ) )
