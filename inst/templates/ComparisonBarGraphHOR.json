@@ -1,0 +1,17 @@
+{
+  "@context":{
+    "@vocab": "http://schema.org/",
+    "uses_intervention_property": "http://example.com/slowmo#UsesInterventionProperty"
+  },
+  "@graph": [
+  {
+    "@id": "http://example.com/app#ComparisonBarGraphHOR",
+    "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
+    "name": "comparison bar horizontal",
+    "uses_intervention_property":[ 
+      "example1",
+      "example2"
+    ]
+  }
+ ]
+}
