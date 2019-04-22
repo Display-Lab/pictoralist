@@ -8,11 +8,10 @@
       "@id": "http://example.com/app#ShowGapTemplate",
       "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
       "name": "sham show gap",
-      "uses_intervention_property":[ 
+      "uses_intervention_property": [
         "example1",
         "example2"
       ]
     }
   ]
 }
-

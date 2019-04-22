@@ -1,19 +1,17 @@
 {
-  "@context":{
+  "@context": {
     "@vocab": "http://schema.org/",
     "uses_intervention_property": "http://example.com/slowmo#UsesInterventionProperty"
   },
-  
   "@graph": [
-  {
-    "@id": "http://example.com/app#TopPerformerGraph",
-    "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
-    "name": "top performer",
-    "uses_intervention_property":[ 
-      "example1",
-      "example2"
-    ]
-  }
+    {
+      "@id": "http://example.com/app#TopPerformerGraph",
+      "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
+      "name": "top performer",
+      "uses_intervention_property": [
+        "example1",
+        "example2"
+      ]
+    }
   ]
 }
-

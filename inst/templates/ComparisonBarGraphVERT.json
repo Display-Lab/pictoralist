@@ -1,5 +1,5 @@
 {
-  "@context":{
+  "@context": {
     "@vocab": "http://schema.org/",
     "uses_intervention_property": "http://example.com/slowmo#UsesInterventionProperty"
   },
@@ -8,7 +8,7 @@
       "@id": "http://example.com/app#ComparisonBarGraphVERT",
       "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
       "name": "comparison bar vertical",
-      "uses_intervention_property":[ 
+      "uses_intervention_property": [
         "example1",
         "example2"
       ]
