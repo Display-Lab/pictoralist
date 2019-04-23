@@ -9,6 +9,14 @@ accept_and_promote_candidate <- function(spek, index){
 
 }
 
+gen_va_gocc_candidates <- function(){
+
+}
+
+gen_mtx_candidates <- function(){
+
+}
+
 # Spek for va_gocc data with categories documented and not_documented.
 gen_va_gocc_spek <- function(){
   list(
