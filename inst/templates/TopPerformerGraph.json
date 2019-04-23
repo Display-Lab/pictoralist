@@ -9,8 +9,7 @@
       "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
       "name": "top performer",
       "uses_intervention_property": [
-        "example1",
-        "example2"
+        "http://example.com/slowmo#GainFraming"
       ]
     }
   ]

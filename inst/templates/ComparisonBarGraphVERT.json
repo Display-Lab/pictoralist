@@ -9,8 +9,9 @@
       "@type": "http://purl.obolibrary.org/obo/psdo#psdo_0000002",
       "name": "comparison bar vertical",
       "uses_intervention_property": [
-        "example1",
-        "example2"
+        "http://example.com/slowmo#ShowsGap",
+        "http://example.com/slowmo#ShowsNegativeGap",
+        "http://example.com/slowmo#ShowsPositiveGap"
       ]
     }
   ]
