@@ -1,5 +1,5 @@
 #' @title Load Templates
-#' @description Load templates
+#' @description Load templates from file(s)
 #' @export
 load_templates <- function(){
   template_paths <- list.files(PT$DEFAULT_TEMPLATE_LOCATION, "\\.[rR]$", full.names=TRUE)
@@ -9,7 +9,7 @@ load_templates <- function(){
 }
 
 #' @title Load Templates
-#' @describeIn Load Templates
+#' @describeIn load_templates
 #' @description Load individual template into it's own environment
 #' @return Environment in which the template was sourced.
 #' @export

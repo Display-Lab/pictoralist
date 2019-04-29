@@ -2,43 +2,36 @@
   "@graph": [
     {
       "@id": "_:b0",
-      "ColumnUse": "time",
-      "description": "Time at which performance was measured.",
-      "datatype": "integer",
-      "name": "timepoint",
-      "titles": "Time"
+      "@type": "http://schema.org/Organization",
+      "address": "_:b1"
     },
     {
       "@id": "_:b1",
-      "columns": [
-        "_:b0",
-        "_:b2",
-        "_:b3"
-      ]
+      "@type": "http://schema.org/PostalAddress",
+      "addressCountry": "United States",
+      "addressLocality": "Ann Arbor",
+      "addressRegion": "Michigan",
+      "name": "Example Client",
+      "postalCode": "48109",
+      "streetAddress": "903 South Univeristy"
     },
     {
       "@id": "_:b2",
-      "ColumnUse": "value",
-      "description": "Demonstration performance value",
-      "datatype": "integer",
-      "name": "performance",
-      "titles": "Performance"
+      "@type": "http://www.w3.org/ns/csvw#Table",
+      "title": "Mock Performance Data",
+      "dialect": "_:b4",
+      "tableSchema": "_:b3"
     },
     {
       "@id": "_:b3",
-      "ColumnUse": "identifier",
-      "description": "Performer unique ID",
-      "datatype": "string",
-      "name": "performer",
-      "titles": "Name"
+      "columns": [
+        "_:b6",
+        "_:b7",
+        "_:b8"
+      ]
     },
     {
       "@id": "_:b4",
-      "http://example.com/slowmo#Guideline": 10,
-      "title": "Generic Performance"
-    },
-    {
-      "@id": "_:b5",
       "commentPrefix": "",
       "delimiter": ",",
       "http://www.w3.org/ns/csvw#doubleQuote": true,
@@ -54,26 +47,33 @@
       "http://www.w3.org/ns/csvw#trim": false
     },
     {
+      "@id": "_:b5",
+      "http://example.com/slowmo#Guideline": 10,
+      "title": "Generic Performance"
+    },
+    {
       "@id": "_:b6",
-      "@type": "http://www.w3.org/ns/csvw#Table",
-      "title": "Mock Performance Data",
-      "dialect": "_:b5",
-      "tableSchema": "_:b1"
+      "ColumnUse": "time",
+      "description": "Time at which performance was measured.",
+      "datatype": "integer",
+      "http://www.w3.org/ns/csvw#name": "timepoint",
+      "titles": "Time"
     },
     {
       "@id": "_:b7",
-      "@type": "http://schema.org/Organization",
-      "address": "_:b8"
+      "ColumnUse": "value",
+      "description": "Demonstration performance value",
+      "datatype": "integer",
+      "http://www.w3.org/ns/csvw#name": "performance",
+      "titles": "Performance"
     },
     {
       "@id": "_:b8",
-      "@type": "http://schema.org/PostalAddress",
-      "addressCountry": "United States",
-      "addressLocality": "Ann Arbor",
-      "addressRegion": "Michigan",
-      "http://schema.org/name": "Example Client",
-      "postalCode": "48109",
-      "streetAddress": "903 South Univeristy"
+      "ColumnUse": "identifier",
+      "description": "Performer unique ID",
+      "datatype": "string",
+      "http://www.w3.org/ns/csvw#name": "performer",
+      "titles": "Name"
     },
     {
       "@id": "http://example.com/app#39c1b9179d797ec609512dcdd31f3ee1",
@@ -88,7 +88,7 @@
         "mastery_present",
         "positive_trend"
       ],
-      "http://schema.org/name": "gap figure"
+      "name": "gap figure"
     },
     {
       "@id": "http://example.com/app#65f1e3d1d0d181738910cd077654e565",
@@ -102,7 +102,7 @@
         "negative_gap",
         "mastery_unknown"
       ],
-      "http://schema.org/name": "trend figure"
+      "name": "trend figure"
     },
     {
       "@id": "http://example.com/app#6acc44bbc1bdc91b75459013d3d0e195",
@@ -121,7 +121,7 @@
         "negative_gap",
         "mastery_unknown"
       ],
-      "http://schema.org/name": "gap figure"
+      "name": "gap figure"
     },
     {
       "@id": "http://example.com/app#76122eecee9ff6deaf6c8cd03af2b3c1",
@@ -135,7 +135,7 @@
         "mastery_present",
         "positive_trend"
       ],
-      "http://schema.org/name": "trend figure"
+      "name": "trend figure"
     },
     {
       "@id": "http://example.com/app#99b0f12ab7c3fce7ca65ae21f2e14a89",
@@ -144,7 +144,7 @@
       "AncestorTemplate": "http://example.com/app#ShowTrendTemplate",
       "uses_intervention_property": "show_trend",
       "RO_0000091": "mastery_present",
-      "http://schema.org/name": "trend figure"
+      "name": "trend figure"
     },
     {
       "@id": "http://example.com/app#Alice",
@@ -183,13 +183,12 @@
         "peer_comparison"
       ],
       "RO_0000091": "mastery_present",
-      "http://schema.org/name": "gap figure"
+      "name": "gap figure"
     },
     {
       "@id": "http://example.com/app#example-client",
       "@type": "http://example.com/slowmo#spek",
-      "related_location": "_:b7",
-      "hasCandidate": [
+      "HasCandidate": [
         "http://example.com/app#a12441c50edfe1f8bd84db8bd0bf8427",
         "http://example.com/app#39c1b9179d797ec609512dcdd31f3ee1",
         "http://example.com/app#6acc44bbc1bdc91b75459013d3d0e195",
@@ -197,39 +196,40 @@
         "http://example.com/app#76122eecee9ff6deaf6c8cd03af2b3c1",
         "http://example.com/app#99b0f12ab7c3fce7ca65ae21f2e14a89"
       ],
-      "InputTable": "_:b6",
-      "Measure": "_:b4",
+      "InputTable": "_:b2",
+      "IsAboutCausalPathway": "http://example.com/app#EliminateGap",
       "IsAboutPerformer": [
         "http://example.com/app#Bob",
         "http://example.com/app#Alice",
         "http://example.com/app#Carol"
       ],
-      "http://example.com/slowmo#IsAboutCausalPathway": "http://example.com/app#EliminateGap",
-      "http://example.com/slowmo#IsAboutTemplate": [
+      "IsAboutTemplate": [
         "http://example.com/app#ShowGapTemplate",
         "http://example.com/app#ShowTrendTemplate"
-      ]
+      ],
+      "Measure": "_:b5",
+      "RelatedLocation": "_:b0"
     }
   ],
   "@context": {
-    "ColumnUse": {
-      "@id": "http://example.com/slowmo#ColumnUse"
-    },
-    "titles": {
-      "@id": "http://www.w3.org/ns/csvw#titles"
-    },
-    "datatype": {
-      "@id": "http://www.w3.org/ns/csvw#datatype"
-    },
-    "name": {
-      "@id": "http://www.w3.org/ns/csvw#name"
-    },
-    "description": {
-      "@id": "http://purl.org/dc/terms/description"
-    },
-    "columns": {
-      "@id": "http://www.w3.org/ns/csvw#columns",
+    "address": {
+      "@id": "http://schema.org/address",
       "@type": "@id"
+    },
+    "title": {
+      "@id": "http://purl.org/dc/terms/title"
+    },
+    "tableSchema": {
+      "@id": "http://www.w3.org/ns/csvw#tableSchema",
+      "@type": "@id"
+    },
+    "dialect": {
+      "@id": "http://www.w3.org/ns/csvw#dialect",
+      "@type": "@id"
+    },
+    "Guideline": {
+      "@id": "http://example.com/slowmo#Guideline",
+      "@type": "http://www.w3.org/2001/XMLSchema#integer"
     },
     "AncestorTemplate": {
       "@id": "http://example.com/slowmo#AncestorTemplate"
@@ -243,12 +243,20 @@
     "uses_intervention_property": {
       "@id": "http://example.com/slowmo#uses_intervention_property"
     },
-    "Guideline": {
-      "@id": "http://example.com/slowmo#Guideline",
-      "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    "name": {
+      "@id": "http://schema.org/name"
     },
-    "title": {
-      "@id": "http://purl.org/dc/terms/title"
+    "ColumnUse": {
+      "@id": "http://example.com/slowmo#ColumnUse"
+    },
+    "titles": {
+      "@id": "http://www.w3.org/ns/csvw#titles"
+    },
+    "datatype": {
+      "@id": "http://www.w3.org/ns/csvw#datatype"
+    },
+    "description": {
+      "@id": "http://purl.org/dc/terms/description"
     },
     "promoted_by": {
       "@id": "http://example.com/slowmo#promoted_by",
@@ -256,6 +264,38 @@
     },
     "acceptable_by": {
       "@id": "http://example.com/slowmo#acceptable_by",
+      "@type": "@id"
+    },
+    "Measure": {
+      "@id": "http://example.com/slowmo#Measure",
+      "@type": "@id"
+    },
+    "IsAboutCausalPathway": {
+      "@id": "http://example.com/slowmo#IsAboutCausalPathway",
+      "@type": "@id"
+    },
+    "InputTable": {
+      "@id": "http://example.com/slowmo#InputTable",
+      "@type": "@id"
+    },
+    "IsAboutPerformer": {
+      "@id": "http://example.com/slowmo#IsAboutPerformer",
+      "@type": "@id"
+    },
+    "RelatedLocation": {
+      "@id": "http://example.com/slowmo#RelatedLocation",
+      "@type": "@id"
+    },
+    "IsAboutTemplate": {
+      "@id": "http://example.com/slowmo#IsAboutTemplate",
+      "@type": "@id"
+    },
+    "HasCandidate": {
+      "@id": "http://example.com/slowmo#HasCandidate",
+      "@type": "@id"
+    },
+    "columns": {
+      "@id": "http://www.w3.org/ns/csvw#columns",
       "@type": "@id"
     },
     "skipBlankRows": {
@@ -303,38 +343,6 @@
     "skipRows": {
       "@id": "http://www.w3.org/ns/csvw#skipRows"
     },
-    "IsAboutCausalPathway": {
-      "@id": "http://example.com/slowmo#IsAboutCausalPathway",
-      "@type": "@id"
-    },
-    "Measure": {
-      "@id": "http://example.com/slowmo#Measure",
-      "@type": "@id"
-    },
-    "hasCandidate": {
-      "@id": "http://example.com/slowmo#hasCandidate",
-      "@type": "@id"
-    },
-    "InputTable": {
-      "@id": "http://example.com/slowmo#InputTable",
-      "@type": "@id"
-    },
-    "IsAboutTemplate": {
-      "@id": "http://example.com/slowmo#IsAboutTemplate",
-      "@type": "@id"
-    },
-    "related_location": {
-      "@id": "http://example.com/app#related_location",
-      "@type": "@id"
-    },
-    "IsAboutPerformer": {
-      "@id": "http://example.com/slowmo#IsAboutPerformer",
-      "@type": "@id"
-    },
-    "address": {
-      "@id": "http://schema.org/address",
-      "@type": "@id"
-    },
     "addressRegion": {
       "@id": "http://schema.org/addressRegion"
     },
@@ -349,14 +357,6 @@
     },
     "addressCountry": {
       "@id": "http://schema.org/addressCountry"
-    },
-    "tableSchema": {
-      "@id": "http://www.w3.org/ns/csvw#tableSchema",
-      "@type": "@id"
-    },
-    "dialect": {
-      "@id": "http://www.w3.org/ns/csvw#dialect",
-      "@type": "@id"
     }
   }
 }

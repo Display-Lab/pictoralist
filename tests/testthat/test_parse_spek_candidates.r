@@ -3,7 +3,7 @@ context('Parse Spek Templates')
 SPEK_WITH_CANDIDATES <- list(
     list(
       `@id` = "http://example.com/app#Aaron",
-      `@type` = "http://example.com/slowmo#ascribee",
+      `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
       `http://purl.obolibrary.org/obo/RO_0000091` = list( list(`@value` = "mastery_unknown") )
     ),
     list(
@@ -27,14 +27,14 @@ SPEK_WITH_CANDIDATES <- list(
 SPEK_SANS_CANDIDATES <- list(
   list(
     `@id` = "http://example.com/app#Bob",
-    `@type` = "http://example.com/slowmo#ascribee",
+    `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
     `http://purl.obolibrary.org/obo/RO_0000091` = list(
       list(`@value` = "mastery_present"),
       list(`@value` = "positive_trend")
     ) ),
   list(
     `@id` = "http://example.com/app#Alice",
-    `@type` = "http://example.com/slowmo#ascribee",
+    `@type` = "http://purl.obolibrary.org/obo/psdo_0000085",
     `http://purl.obolibrary.org/obo/RO_0000091` = list(
       list(`@value` = "small_gap"),
       list(`@value` = "mastery_unknown")

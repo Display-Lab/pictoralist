@@ -4,11 +4,11 @@ context("Read Spek")
 JSON_EXAMPLE <- '{
   "@graph" : [{
     "@id" : "http://example.com/app#Alice",
-    "@type" : "http://example.com/slowmo#ascribee",
+    "@type": "http://purl.obolibrary.org/obo/psdo_0000085",
     "RO_0000091" : [ "small_gap", "negative_trend", "negative_gap", "mastery_unknown" ]
   }, {
     "@id" : "http://example.com/app#Bob",
-    "@type" : "http://example.com/slowmo#ascribee",
+    "@type": "http://purl.obolibrary.org/obo/psdo_0000085",
     "RO_0000091" : [ "mastery_present", "positive_trend" ]
   }]
 }'
