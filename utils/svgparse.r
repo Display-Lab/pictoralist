@@ -231,19 +231,32 @@ rects <- generate_dividers(polyg, 100)
 ### Chop up polygon into 100 equal vertical slices
 slices <- intersect_dividers(polyg, rects)
 
-### Add some performance results as a status column
+# ggplot() + geom_point(aes(x=x,y=y),data=coords)
+# ggplot() + geom_sf(data=polyg)
+# ggplot() + geom_sf(data=st_sf(st_sfc(rects)))
+
+### Add some performance results as a status column and plot
 slices[1:80, 'status'] <- 'complete'
 slices[81:100, 'status'] <- 'incomplete'
-
-ggplot() + geom_point(aes(x=x,y=y),data=coords)
-ggplot() + geom_sf(data=polyg)
-ggplot() + geom_sf(data=st_sf(st_sfc(rects)))
 
 ggplot() +
   geom_sf(aes(fill=status), data=slices, lwd=0) +
   geom_sf(data=polyg, fill=NA, lwd=2) +
   scale_fill_manual(values=c('complete'='light blue', 'incomplete'='white'))
 
+### Emit polygon and slices as text for serialization
+polyg_text <- sf::st_as_text(polyg)
+slices_text <- sf::st_as_text(slices[[1]])
 
+# reify
+re_polyg <- st_sf(st_as_sfc(polyg_text))
+re_slices <- st_sf(st_as_sfc(slices_text))
 
+re_slices[1:80, 'status'] <- 'complete'
+re_slices[81:100, 'status'] <- 'incomplete'
+
+ggplot() +
+  geom_sf(aes(fill=status), data=re_slices, lwd=0) +
+  geom_sf(data=re_polyg, fill=NA, lwd=2) +
+  scale_fill_manual(values=c('complete'='light blue', 'incomplete'='white'))
 
