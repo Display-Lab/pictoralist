@@ -9,8 +9,12 @@ Encoding: UTF-8
 LazyData: true
 Suggests: 
   testthat,
+  tibble,
   mockery
-RoxygenNote: 6.1.0
-Imports: jsonld,
+RoxygenNote: 6.1.1
+Imports: dplyr,
+  ggplot2,
+  extrafont,
+  readr,
+  jsonld,
   jsonlite,
-  readr

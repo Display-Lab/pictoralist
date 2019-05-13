@@ -2,7 +2,10 @@
 #' @description Load templates from file(s)
 #' @export
 load_templates <- function(){
-  template_paths <- list.files(PT$DEFAULT_TEMPLATE_LOCATION, "\\.[rR]$", full.names=TRUE)
+  # This default cannot be moved to package constants due to staged-installation
+  DEFAULT_TEMPLATE_LOCATION <- system.file("templates", package="pictoralist")
+
+  template_paths <- list.files(DEFAULT_TEMPLATE_LOCATION, "\\.[rR]$", full.names=TRUE)
   envs <- lapply(template_paths, source_template)
   names(envs) <- sapply(envs, getElement, "template_name")
   return(envs)

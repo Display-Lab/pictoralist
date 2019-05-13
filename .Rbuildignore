@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^utils/.*
+^utils$
+^bin/.*
+^bin$
+^readme.md$
+^scratch\.[Rr]$
