@@ -16,6 +16,4 @@ PT$COLUMN_TITLES_URI <- "http://www.w3.org/ns/csvw#titles"
 PT$COLUMN_TYPE_URI   <- "http://www.w3.org/ns/csvw#datatype"
 PT$CSV_TABLE_URI     <- "http://www.w3.org/ns/csvw#Table"
 
-PT$DEFAULT_TEMPLATE_LOCATION <- system.file("templates", package="pictoralist")
-
 PT$APP_BASE_URI <- "http://example.com/app#"
