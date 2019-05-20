@@ -59,20 +59,21 @@ leaderboard_theme <- function(){
 }
 # Avoids connection between one path to the next (lengths[4] -> lengths[5])
 ## Assemble components into input data
+run <- function(recipient, data, spek){
+  df <- data.frame(id=ids, numer=numerators, denom=denominators)
 
-df <- data.frame(id=ids, numer=numerators, denom=denominators)
+  # Calculate additional columns data
+  df$rate_label <- mapply(paste, counsel_rate, "%")
+  df$accepted_label <- numerators
+  df$declined_label <- denominators - numerators
+  df$declined_small <- declined_small
+  df$largest <- max(denominators)
+  df$show_line <- show_line
+  df$id = reorder(df$id, counsel_rate)
 
-# Calculate additional columns data
-df$rate_label <- mapply(paste, counsel_rate, "%")
-df$accepted_label <- numerators
-df$declined_label <- denominators - numerators
-df$declined_small <- declined_small
-df$largest <- max(denominators)
-df$show_line <- show_line
-df$id = reorder(df$id, counsel_rate)
+  # reorders data into descending order
+  df <- df %>% arrange(100 - counsel_rate)
 
-# reorders data into descending order
-df <- df %>% arrange(100 - counsel_rate)
-
-make_plot(df)
+  make_plot(df)
+}
 

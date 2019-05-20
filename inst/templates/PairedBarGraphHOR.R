@@ -8,7 +8,6 @@ DL_FILL <- "#FFFFFF"
 DL_RED <- "#853754"
 DL_CYAN <- "#00B5AF"
 DL_ORANGE <- "#BA5827"
-
 recipient_id <- "a"
 
 bar_width <- 0.5
@@ -20,7 +19,7 @@ make_plot <- function(plot_data, recipient_id, goal) {
 
   plot_data %>% ggplot(aes(x=categories, y=rate, fill=id)) +
     single_bar_theme() +
-    geom_col(position="dodge", width=bar_width) +
+    geom_col(position="dodge", width=bar_width*1.25) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0),
                        breaks=breaks_y, labels = labels_y) +
     geom_hline(yintercept = achievable_benchmark_line,
@@ -32,11 +31,11 @@ make_plot <- function(plot_data, recipient_id, goal) {
     geom_text(mapping = aes(x=categories,
                             y=0.10,
                             label=recipient_labs),
-              color=DL_FILL, nudge_x=-0.25*bar_width) +
+              color=DL_FILL, nudge_x=-0.30*bar_width) +
     geom_text(mapping = aes(x=categories,
                             y=0.10,
                             label=nonrecipient_labs),
-              color=DL_FILL, nudge_x=0.25*bar_width) +
+              color=DL_FILL, nudge_x=0.30*bar_width) +
     scale_fill_manual(values = palette,
                       guide=FALSE) +
     coord_flip()
@@ -85,6 +84,7 @@ single_bar_theme <- function(){
           panel.grid.minor=element_blank(),
           plot.background=element_blank())
 }
-
-make_plot(df, recipient_id, achievable_benchmark_line)
+run <- function(recipient, data, spek){
+  make_plot(df, recipient_id, achievable_benchmark_line)
+}
 

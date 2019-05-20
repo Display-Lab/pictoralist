@@ -55,43 +55,45 @@ single_bar_theme <- function(){
           legend.position = "none")
 }
 # expects performers to be an ordered facter by performance (descending)
-ordered_performers <- reorder(performers, 1-performance)
-role = (ordered_performers == recipient_id)
-show_label <- ifelse((role), performance_labels, NA)
-show_you <- ifelse((role), "YOU", NA)
-show_arrow <- as.factor(ifelse((role), "show", "noshow"))
+run <- function(recipient, data, spek){
+  ordered_performers <- reorder(performers, 1-performance)
+  role = (ordered_performers == recipient_id)
+  show_label <- ifelse((role), performance_labels, NA)
+  show_you <- ifelse((role), "YOU", NA)
+  show_arrow <- as.factor(ifelse((role), "show", "noshow"))
 
-df <- data.frame(lengths = performance,
-                 performers = ordered_performers,
-                 role = role,
-                 show_label = show_label,
-                 show_arrow = show_arrow)
+  df <- data.frame(lengths = performance,
+                   performers = ordered_performers,
+                   role = role,
+                   show_label = show_label,
+                   show_arrow = show_arrow)
 
 
-breaks_y <- c(0.20, 0.4, 0.6, 0.8, 1.0)
-labels_y <- c("20%", "40%", "60%", "80%", "100%")
+  breaks_y <- c(0.20, 0.4, 0.6, 0.8, 1.0)
+  labels_y <- c("20%", "40%", "60%", "80%", "100%")
 
-col_graph <- ggplot(data=df, aes(x=performers, y=lengths)) +
-  single_bar_theme() +
-  geom_col(mapping = aes(fill=role),
-           position = "dodge", width=0.8) +
-  geom_hline(yintercept = achievable_benchmark_line,
-             linetype = "dashed",
-             color = DL_GRAY) +
-  geom_label(mapping = aes(label=show_label),
-             nudge_y = 0.08, fill=DL_BLUE,
-             color=DL_FILL, label.r = unit(0, "lines")) +
-  geom_text(mapping = aes(label=show_you),
-            nudge_y = 0.14, fill=DL_BLUE,
-            size=3) +
-  geom_point(mapping = aes(y = lengths + 0.05, shape=show_arrow),
-             size=4, color=DL_BLUE) +
-  scale_y_continuous(limits=c(0,1.15), expand=c(0,0), breaks=breaks_y, labels = labels_y) +
-  scale_x_discrete(df$performers, expand=expand_scale(add=c(0.65,2))) +
-  scale_fill_manual(values = c(DL_LIGHT_BLUE, DL_BLUE)) +
-  scale_shape_manual(values = c("show"=18, "noshow"=NA))
+  col_graph <- ggplot(data=df, aes(x=performers, y=lengths)) +
+    single_bar_theme() +
+    geom_col(mapping = aes(fill=role),
+             position = "dodge", width=0.8) +
+    geom_hline(yintercept = achievable_benchmark_line,
+               linetype = "dashed",
+               color = DL_GRAY) +
+    geom_label(mapping = aes(label=show_label),
+               nudge_y = 0.08, fill=DL_BLUE,
+               color=DL_FILL, label.r = unit(0, "lines")) +
+    geom_text(mapping = aes(label=show_you),
+              nudge_y = 0.14, fill=DL_BLUE,
+              size=3) +
+    geom_point(mapping = aes(y = lengths + 0.05, shape=show_arrow),
+               size=4, color=DL_BLUE) +
+    scale_y_continuous(limits=c(0,1.15), expand=c(0,0), breaks=breaks_y, labels = labels_y) +
+    scale_x_discrete(df$performers, expand=expand_scale(add=c(0.65,2))) +
+    scale_fill_manual(values = c(DL_LIGHT_BLUE, DL_BLUE)) +
+    scale_shape_manual(values = c("show"=18, "noshow"=NA))
 
-col_graph +
-  geom_text(aes(15,achievable_benchmark_line,label="GOAL"),
-            nudge_y=-0.05, color=DL_BLUE, size=3)
+  col_graph +
+    geom_text(aes(15,achievable_benchmark_line,label="GOAL"),
+              nudge_y=-0.05, color=DL_BLUE, size=3)
+}
 

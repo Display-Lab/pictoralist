@@ -93,7 +93,9 @@ single_bar_theme <- function(){
           plot.background=element_blank())
 }
 
-plot_data <- make_plot_data(input_data, recipient_id)
+run <- function(recipient, data, spek){
+  plot_data <- make_plot_data(input_data, recipient_id)
 
-make_plot(plot_data, recipient_id, achievable_benchmark_line)
+  make_plot(plot_data, recipient_id, achievable_benchmark_line)
+}
 

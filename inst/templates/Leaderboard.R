@@ -111,4 +111,6 @@ df$id = reorder(df$id, counsel_rate)
 # reorders data into descending order
 df <- df %>% arrange(100 - counsel_rate)
 
-make_plot(df)
+run <- function(recipient, data, spek){
+  make_plot(df)
+}
