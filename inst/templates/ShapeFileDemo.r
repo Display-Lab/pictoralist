@@ -1,9 +1,31 @@
+library(ggplot2)
+library(sf)
+
 # Demo for sf template
+DL_GRAY <- "#878A8F"
+DL_BLUE <- "#00274C"
+DL_LIGHT_BLUE <- "#0174BB"
+DL_FILL <- "#FFFFFF"
+DL_RED <- "#853754"
 
 run <- function(recipient, data, spek){
   # Get the shape frames for the outline and the slices
   outline <- generate_outline()
   slices <- generate_slices()
+
+  # Calculate achievable benchmark percentage
+  benchmark_percentage <- 0.85
+  counsel_label <- "18 / 20"
+  coords <- st_coordinates(outline)
+  min_y <- min(coords[,'Y'])
+  max_y <- max(coords[,'Y'])
+  min_x <- min(coords[,'X'])
+  max_x <- max(coords[,'X'])
+  percentage_y <- (max_y - min_y) * benchmark_percentage
+  percentage_x <- (max_x - min_x)/2
+
+  # y-axis percentages
+  breaks_y <- c(0.2, 0.4, 0.6, 0.8, 1)
 
   ### Add some dummy performance results as a status column
   slices[1:80, 'status'] <- 'complete'
@@ -11,9 +33,43 @@ run <- function(recipient, data, spek){
 
   # Plot
   ggplot() +
-    geom_sf(aes(fill=status), data=slices, lwd=0) +
-    geom_sf(data=outline, fill=NA, lwd=2) +
-    scale_fill_manual(values=c('complete'='light blue', 'incomplete'='white'))
+    geom_sf(aes(color=status, fill=status),
+            data=slices, lwd=1, show.legend = FALSE) +
+    geom_sf(data=outline, fill=NA, lwd=2, color=DL_BLUE) +
+    coord_sf(datum=NA) +
+    annotate(geom="text", x=120, y=percentage_y, label="GOAL",
+             color=DL_BLUE, size=3) +
+    annotate(geom="text", x=percentage_x, y=max_y + max_y*.20,
+             label=counsel_label,
+             color=DL_BLUE, size=6) +
+    annotate(geom="text", x=percentage_x, y=max_y + max_y*.1,
+             label="PATIENTS COUNSELED",
+             color=DL_BLUE, size=4) +
+    annotate(geom="text", x=percentage_x - 25, y=breaks_y*(max_y-min_y),
+             label=paste(breaks_y*100, "%", sep=""), color=DL_BLUE, size=3) +
+    geom_segment(mapping=aes(x=75, y=percentage_y, xend=99, yend=percentage),
+                 color=DL_GRAY, linetype=2) +
+    scale_color_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
+    scale_fill_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
+    theme_void()
+
+}
+
+iud_theme <- function(){
+  theme_classic() +
+    theme(axis.line=element_blank(),
+          axis.text.x=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),
+          legend.position="none",
+          panel.background=element_blank(),
+          panel.border=element_blank(),
+          panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),
+          panel.grid=element_blank(),
+          plot.background=element_blank())
 }
 
 # Emit a sf object representing the shape outline
@@ -165,3 +221,4 @@ generate_slices <- function(){
     )
   )
 }
+
