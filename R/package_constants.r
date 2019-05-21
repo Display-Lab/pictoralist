@@ -17,3 +17,15 @@ PT$COLUMN_TYPE_URI   <- "http://www.w3.org/ns/csvw#datatype"
 PT$CSV_TABLE_URI     <- "http://www.w3.org/ns/csvw#Table"
 
 PT$APP_BASE_URI <- "http://example.com/app#"
+
+# Style-guide colors
+PT$DL_GREEN        <- "#108A00"
+PT$DL_LIGHT_BLUE   <- "#0174BB"
+PT$DL_RED          <- "#853754"
+PT$DL_CYAN         <- "#00B5AF"
+PT$DL_BLACK        <- "#000000"
+PT$DL_GRAY         <- "#878A8F"
+PT$DL_BLUE         <- "#00274C"
+PT$DL_ORANGE       <- "#BA5827"
+PT$DL_FILL         <- "#FFFFFF"
+PT$DL_LIGHT_BORDER <- "#e7edee" # used in TopPerformerGraph

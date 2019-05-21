@@ -1,12 +1,6 @@
 library(ggplot2)
 library(sf)
-
-# Demo for sf template
-DL_GRAY <- "#878A8F"
-DL_BLUE <- "#00274C"
-DL_LIGHT_BLUE <- "#0174BB"
-DL_FILL <- "#FFFFFF"
-DL_RED <- "#853754"
+library(pictoralist)
 
 run <- function(recipient, data, spek){
   # Get the shape frames for the outline and the slices
@@ -35,22 +29,22 @@ run <- function(recipient, data, spek){
   ggplot() +
     geom_sf(aes(color=status, fill=status),
             data=slices, lwd=1, show.legend = FALSE) +
-    geom_sf(data=outline, fill=NA, lwd=2, color=DL_BLUE) +
+    geom_sf(data=outline, fill=NA, lwd=2, color=PT$DL_BLUE) +
     coord_sf(datum=NA) +
     annotate(geom="text", x=120, y=percentage_y, label="GOAL",
-             color=DL_BLUE, size=3) +
+             color=PT$DL_BLUE, size=3) +
     annotate(geom="text", x=percentage_x, y=max_y + max_y*.20,
              label=counsel_label,
-             color=DL_BLUE, size=6) +
+             color=PT$DL_BLUE, size=6) +
     annotate(geom="text", x=percentage_x, y=max_y + max_y*.1,
              label="PATIENTS COUNSELED",
-             color=DL_BLUE, size=4) +
+             color=PT$DL_BLUE, size=4) +
     annotate(geom="text", x=percentage_x - 25, y=breaks_y*(max_y-min_y),
-             label=paste(breaks_y*100, "%", sep=""), color=DL_BLUE, size=3) +
-    geom_segment(mapping=aes(x=75, y=percentage_y, xend=99, yend=percentage),
-                 color=DL_GRAY, linetype=2) +
-    scale_color_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
-    scale_fill_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
+             label=paste(breaks_y*100, "%", sep=""), color=PT$DL_BLUE, size=3) +
+    geom_segment(mapping=aes(x=75, y=percentage_y, xend=99, yend=percentage_y),
+                 color=PT$DL_GRAY, linetype=2) +
+    scale_color_manual(values=c('complete'=PT$DL_BLUE, 'incomplete'=PT$DL_FILL)) +
+    scale_fill_manual(values=c('complete'=PT$DL_BLUE, 'incomplete'=PT$DL_FILL)) +
     theme_void()
 
 }

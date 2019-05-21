@@ -1,20 +1,14 @@
 library(ggplot2)
 library(dplyr)
+library(pictoralist)
 
-DL_GRAY <- "#878A8F"
-DL_BLUE <- "#00274C"
-DL_LIGHT_BLUE <- "#0174BB"
-DL_FILL <- "#FFFFFF"
-DL_RED <- "#853754"
-DL_CYAN <- "#00B5AF"
-DL_ORANGE <- "#BA5827"
 recipient_id <- "a"
 
 bar_width <- 0.5
 
 make_plot <- function(plot_data, recipient_id, goal) {
   pal_names <- c(recipient_id, "b")
-  palette <- c(DL_BLUE, DL_LIGHT_BLUE)
+  palette <- c(PT$DL_BLUE, PT$DL_LIGHT_BLUE)
   names(palette) <- pal_names
 
   plot_data %>% ggplot(aes(x=categories, y=rate, fill=id)) +
@@ -24,18 +18,18 @@ make_plot <- function(plot_data, recipient_id, goal) {
                        breaks=breaks_y, labels = labels_y) +
     geom_hline(yintercept = achievable_benchmark_line,
                linetype = "dashed",
-               color = DL_GRAY) +
+               color = PT$DL_GRAY) +
     geom_text(mapping = aes(label="GOAL", y=achievable_benchmark_line + 0.05,
                             x=num_categories + 0.55),
-              size=3, color=DL_BLUE) +
+              size=3, color=PT$DL_BLUE) +
     geom_text(mapping = aes(x=categories,
                             y=0.10,
                             label=recipient_labs),
-              color=DL_FILL, nudge_x=-0.30*bar_width) +
+              color=PT$DL_FILL, nudge_x=-0.30*bar_width) +
     geom_text(mapping = aes(x=categories,
                             y=0.10,
                             label=nonrecipient_labs),
-              color=DL_FILL, nudge_x=0.30*bar_width) +
+              color=PT$DL_FILL, nudge_x=0.30*bar_width) +
     scale_fill_manual(values = palette,
                       guide=FALSE) +
     coord_flip()
@@ -76,7 +70,7 @@ single_bar_theme <- function(){
   theme_classic() +
     theme(axis.ticks=element_blank(),
           axis.title.x=element_blank(),
-          axis.text = element_text(color=DL_BLUE),
+          axis.text = element_text(color=PT$DL_BLUE),
           axis.title.y=element_blank(),
           panel.background=element_blank(),
           panel.border=element_blank(),

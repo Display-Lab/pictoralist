@@ -2,12 +2,9 @@ library(ggplot2)
 library(dplyr)
 library(grid)
 library(lubridate)
-library(scales) # For % scale on y-axis
-run <- function(recipient, data, spek){
-  DL_GRAY <- "#878A8F"
-  DL_BLUE <- "#00274C"
-  DL_FILL <- "#FFFFFF"
+library(pictoralist)
 
+run <- function(recipient, data, spek){
   # Dummy input data
   t1 <- "2012-01-26"
   t2 <- "2012-02-26"
@@ -26,13 +23,17 @@ run <- function(recipient, data, spek){
   date4 <- ymd(t4)
   dates <- c(date1, date2, date3, date4)
 
+  # y axis labels
+  breaks_y <- c(0.20, 0.4, 0.6, 0.8, 1.0)
+  labels_y <- c("20%", "40%", "60%", "80%", "100%")
+
   # Removes grid and provides correct axis style
   # (missing y-axis ticks on actual axis)
   single_bar_theme <- function(){
     theme_classic() +
       theme(axis.ticks=element_blank(),
             axis.title.x=element_blank(),
-            axis.text = element_text(color=DL_BLUE),
+            axis.text = element_text(color=PT$DL_BLUE),
             axis.title.y=element_blank(),
             panel.background=element_blank(),
             panel.border=element_blank(),
@@ -53,10 +54,11 @@ run <- function(recipient, data, spek){
 
   bar_graph <- ggplot(data=df, aes(x=dates, y=lengths, label=labels)) +
     single_bar_theme() +
-    geom_bar(fill=DL_BLUE, stat="identity") +
-    geom_text(nudge_y = rep(-0.05,4), color=DL_FILL) +
+    geom_bar(fill=PT$DL_BLUE, stat="identity") +
+    geom_text(nudge_y = rep(-0.05,4), color=PT$DL_FILL) +
     scale_x_date(date_labels = "%b") +
-    scale_y_continuous(limits=c(0,1.1), expand=c(0,0), labels = scales::percent)
+    scale_y_continuous(limits=c(0,1.1), expand=c(0,0),
+                       breaks=breaks_y, labels = labels_y)
 
   # Creates achievable benchmark line with correct dashed legend
   benchmarks <- c(.70, .60, .80, .75)
@@ -65,9 +67,9 @@ run <- function(recipient, data, spek){
     geom_line(mapping=aes(y=benchmarks, linetype="GOAL"),
               size=1,
               lineend="round",
-              color=DL_GRAY) +
+              color=PT$DL_GRAY) +
     theme(legend.position = c(0.9,0.95), legend.title = element_blank(),
           legend.key.size =  unit(0.5, "in"),
-          legend.text = element_text(color=DL_BLUE)) +
+          legend.text = element_text(color=PT$DL_BLUE)) +
     scale_linetype_manual(values = c("GOAL" = 2))
 }

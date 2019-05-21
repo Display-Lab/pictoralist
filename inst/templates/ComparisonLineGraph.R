@@ -2,17 +2,10 @@ library(ggplot2)
 library(dplyr)
 library(grid)
 library(lubridate)
-
-DL_GRAY <- "#878A8F"
-DL_BLUE <- "#00274C"
-DL_LIGHT_BLUE <- "#0174BB"
-DL_FILL <- "#FFFFFF"
-DL_RED <- "#853754"
-DL_CYAN <- "#00B5AF"
-DL_ORANGE <- "#BA5827"
+library(pictoralist)
 
 run <- function(recipient, data, spek){
-  color_palette <- c(DL_RED, DL_LIGHT_BLUE, DL_CYAN, DL_ORANGE)
+  color_palette <- c(PT$DL_RED, PT$DL_LIGHT_BLUE, PT$DL_CYAN, PT$DL_ORANGE)
 
   # Synthetic input data
   ids <- c(rep("a",4), rep("b",4),rep("c",4),rep("d",4))
@@ -31,7 +24,7 @@ run <- function(recipient, data, spek){
   non_recipients <- unique(ids[ids != "a"])
   modified_palette <- list()
   modified_palette[non_recipients] <- color_palette
-  modified_palette[[recipient]] <- DL_BLUE
+  modified_palette[[recipient]] <- PT$DL_BLUE
   modified_palette <- unlist(modified_palette)
 
   # Removes grid and provides correct axis style
@@ -40,7 +33,7 @@ run <- function(recipient, data, spek){
     theme_classic() +
       theme(axis.ticks=element_blank(),
             axis.title.x=element_blank(),
-            axis.text = element_text(color=DL_BLUE),
+            axis.text = element_text(color=PT$DL_BLUE),
             axis.title.y=element_blank(),
             panel.background=element_blank(),
             panel.border=element_blank(),
@@ -77,17 +70,17 @@ run <- function(recipient, data, spek){
     single_line_theme() +
     geom_hline(yintercept = achievable_benchmark_line,
                linetype = "dashed",
-               color = DL_GRAY) +
+               color = PT$DL_GRAY) +
     geom_label(mapping = aes(label=show_label),
-               nudge_y = 0.1, fill=DL_BLUE,
-               color=DL_FILL, label.r = unit(0, "lines")) +
+               nudge_y = 0.1, fill=PT$DL_BLUE,
+               color=PT$DL_FILL, label.r = unit(0, "lines")) +
     geom_point(mapping = aes(y = lengths + 0.07, shape=show_arrow),
-               size=4, color= DL_BLUE) +
+               size=4, color= PT$DL_BLUE) +
     geom_line(mapping=aes(x=date, y=lengths, color=id),
               size=1,
               lineend="round") +
     geom_point(mapping=aes(y=lengths, color=id),
-               size=2, fill=DL_FILL,
+               size=2, fill=PT$DL_FILL,
                shape=21, stroke=1.2) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0),
                        breaks=breaks_y, labels = labels_y) +
@@ -99,6 +92,6 @@ run <- function(recipient, data, spek){
 
   col_graph + geom_text(mapping = aes(label="GOAL", y=achievable_benchmark_line - 0.04,
                                       x=max_date + goal_offset),
-                        size=3, color=DL_BLUE)
+                        size=3, color=PT$DL_BLUE)
 }
 

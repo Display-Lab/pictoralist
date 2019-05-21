@@ -1,11 +1,7 @@
 library(ggplot2)
 library(dplyr)
 library(grid)
-
-DL_GRAY <- "#878A8F"
-DL_BLUE <- "#00274C"
-DL_LIGHT_BLUE <- "#0174BB"
-DL_FILL <- "#FFFFFF"
+library(pictoralist)
 
 # Dummy input data (performers/performance)
 p1 <- "1"
@@ -45,7 +41,7 @@ single_bar_theme <- function(){
   theme_classic() +
     theme(axis.ticks=element_blank(),
           axis.title.x=element_blank(),
-          axis.text = element_text(color=DL_BLUE),
+          axis.text = element_text(color=PT$DL_BLUE),
           axis.title.y=element_blank(),
           panel.background=element_blank(),
           panel.border=element_blank(),
@@ -78,22 +74,22 @@ run <- function(recipient, data, spek){
              position = "dodge", width=0.8) +
     geom_hline(yintercept = achievable_benchmark_line,
                linetype = "dashed",
-               color = DL_GRAY) +
+               color = PT$DL_GRAY) +
     geom_label(mapping = aes(label=show_label),
-               nudge_y = 0.08, fill=DL_BLUE,
-               color=DL_FILL, label.r = unit(0, "lines")) +
+               nudge_y = 0.08, fill=PT$DL_BLUE,
+               color=PT$DL_FILL, label.r = unit(0, "lines")) +
     geom_text(mapping = aes(label=show_you),
-              nudge_y = 0.14, fill=DL_BLUE,
+              nudge_y = 0.14, fill=PT$DL_BLUE,
               size=3) +
     geom_point(mapping = aes(y = lengths + 0.05, shape=show_arrow),
-               size=4, color=DL_BLUE) +
+               size=4, color=PT$DL_BLUE) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0), breaks=breaks_y, labels = labels_y) +
     scale_x_discrete(df$performers, expand=expand_scale(add=c(0.65,2))) +
-    scale_fill_manual(values = c(DL_LIGHT_BLUE, DL_BLUE)) +
+    scale_fill_manual(values = c(PT$DL_LIGHT_BLUE, PT$DL_BLUE)) +
     scale_shape_manual(values = c("show"=18, "noshow"=NA))
 
   col_graph +
     geom_text(aes(15,achievable_benchmark_line,label="GOAL"),
-              nudge_y=-0.05, color=DL_BLUE, size=3)
+              nudge_y=-0.05, color=PT$DL_BLUE, size=3)
 }
 

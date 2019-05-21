@@ -2,13 +2,9 @@ library(ggplot2)
 library(dplyr)
 library(grid)
 library(lubridate)
+library(pictoralist)
 
 run <- function(recipient, data, spek){
-  DL_GRAY <- "#878A8F"
-  DL_BLUE <- "#00274C"
-  DL_LIGHT_BLUE <- "#0174BB"
-  DL_FILL <- "#FFFFFF"
-
   # Dummy input data (performers/performance)
   # Dummy input data
   t1 <- "2012-01-26"
@@ -29,7 +25,7 @@ run <- function(recipient, data, spek){
     theme_classic() +
       theme(axis.ticks=element_blank(),
             axis.title.x=element_blank(),
-            axis.text = element_text(color=DL_BLUE),
+            axis.text = element_text(color=PT$DL_BLUE),
             axis.title.y=element_blank(),
             panel.background=element_blank(),
             panel.border=element_blank(),
@@ -61,18 +57,18 @@ run <- function(recipient, data, spek){
     single_line_theme() +
     geom_hline(yintercept = achievable_benchmark_line,
                linetype = "dashed",
-               color = DL_GRAY) +
+               color = PT$DL_GRAY) +
     geom_label(mapping = aes(label=performance_labels),
-               nudge_y = 0.1, fill=DL_BLUE,
-               color=DL_FILL, label.r = unit(0, "lines")) +
+               nudge_y = 0.1, fill=PT$DL_BLUE,
+               color=PT$DL_FILL, label.r = unit(0, "lines")) +
     geom_point(mapping = aes(y = lengths + 0.07),
-               size=4, color= DL_BLUE, shape=18) +
+               size=4, color= PT$DL_BLUE, shape=18) +
     geom_line(mapping=aes(y=lengths),
               size=1,
               lineend="round",
-              color=DL_BLUE) +
+              color=PT$DL_BLUE) +
     geom_point(mapping = aes(y = lengths),
-               size=2, color=DL_BLUE, fill=DL_FILL,
+               size=2, color=PT$DL_BLUE, fill=PT$DL_FILL,
                shape=21, stroke=1.2) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0),
                        breaks=breaks_y, labels = labels_y) +
@@ -80,5 +76,5 @@ run <- function(recipient, data, spek){
 
   col_graph + geom_text(mapping = aes(label="GOAL", y=achievable_benchmark_line - 0.04,
                                       x=max_date + goal_offset),
-                        size=3, color=DL_BLUE)
+                        size=3, color=PT$DL_BLUE)
 }

@@ -1,12 +1,6 @@
 library(ggplot2)
 library(dplyr)
-
-DL_GRAY <- "#878A8F"
-DL_BLUE <- "#00274C"
-DL_LIGHT_BLUE <- "#0174BB"
-DL_FILL <- "#FFFFFF"
-DL_RED <- "#853754"
-
+library(pictoralist)
 
 # Synthetic input data
 ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
@@ -27,16 +21,16 @@ declined_large <- ifelse(counsel_rate < 85, declined, NA)
 make_plot <- function(plot_data) {
   plot_data %>% ggplot(aes(x=id, label=id)) +
     leaderboard_theme() +
-    geom_col(mapping=aes(y=denom), fill=DL_LIGHT_BLUE) +
-    geom_text(mapping=aes(y=denom - largest*0.07, label=declined_label), color=DL_FILL) +
-    geom_col(mapping=aes(y=numer), fill=DL_BLUE) +
-    geom_text(mapping=aes(y=largest*0.07, label=numer), color=DL_FILL) +
+    geom_col(mapping=aes(y=denom), fill=PT$DL_LIGHT_BLUE) +
+    geom_text(mapping=aes(y=denom - largest*0.07, label=declined_label), color=PT$DL_FILL) +
+    geom_col(mapping=aes(y=numer), fill=PT$DL_BLUE) +
+    geom_text(mapping=aes(y=largest*0.07, label=numer), color=PT$DL_FILL) +
     geom_segment(mapping=aes(y=numer + 0.5*declined_label, yend=denom*0.85, xend=id, color=show_line)) +
-    geom_text(mapping=aes(y=denom*0.80, label=declined_small), color=DL_FILL) +
+    geom_text(mapping=aes(y=denom*0.80, label=declined_small), color=PT$DL_FILL) +
     scale_y_continuous(expand=c(0.1,0)) +
     geom_text(mapping=aes(y=largest*-0.12, label=rate_label, fontface="bold"),
-              color=DL_BLUE) +
-    scale_color_manual(values = c("show"=DL_FILL, "noshow"=NA)) +
+              color=PT$DL_BLUE) +
+    scale_color_manual(values = c("show"=PT$DL_FILL, "noshow"=NA)) +
     coord_flip()
 }
 
@@ -46,7 +40,7 @@ leaderboard_theme <- function(){
   theme_classic() +
     theme(axis.line=element_blank(),
           axis.text.x=element_blank(),
-          axis.text.y=element_text(color=DL_BLUE),
+          axis.text.y=element_text(color=PT$DL_BLUE),
           axis.ticks=element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),
