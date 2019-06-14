@@ -4,10 +4,11 @@
 #' @param data_path Path to performance data.
 #' @importFrom extrafont loadfonts
 #' @importFrom extrafont font_import
+#' @importFrom spekex read_spek
 #' @export
 main <- function(spek_path = NULL, data_path = NULL) {
   # Read spek
-  spek <- read_spek(spek_path)
+  spek <- spekex::read_spek(spek_path)
 
   # Parse spek
   candidates <- parse_spek_candidates(spek)

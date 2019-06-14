@@ -47,7 +47,7 @@ run <- function(recipient, data, spek){
              color=DL_BLUE, size=4) +
     annotate(geom="text", x=percentage_x - 25, y=breaks_y*(max_y-min_y),
              label=paste(breaks_y*100, "%", sep=""), color=DL_BLUE, size=3) +
-    geom_segment(mapping=aes(x=75, y=percentage_y, xend=99, yend=percentage),
+    geom_segment(mapping=aes(x=75, y=percentage_y, xend=99, yend=percentage_y),
                  color=DL_GRAY, linetype=2) +
     scale_color_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
     scale_fill_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +

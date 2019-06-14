@@ -2,8 +2,8 @@ context("Integration test of baked in templates")
 
 
 test_that("Baked in templates work with mtx data",{
-  mtx_data <- gen_mtx_behavior_data()
-  mtx_spek <- gen_mtx_behavior_spek()
+  mtx_data <- read_data(spekex::get_data_path("mtx"))
+  mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
   templates <- load_templates()
 
