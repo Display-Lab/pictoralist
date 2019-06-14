@@ -9,5 +9,6 @@ test_that("Baked in templates work with mtx data",{
 
   results <- lapply(templates, FUN=function(t, recip, data, spek){t$run(recip, data, spek)},
                     recip = "E87746", data=mtx_data, spek=mtx_spek)
-
+  is_ggplot <- sapply(results, function(x){"ggplot" %in% class(x)})
+  expect_true(all(is_ggplot))
 })
