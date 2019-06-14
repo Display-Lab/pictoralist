@@ -4,11 +4,7 @@ library(pictoralist)
 
 # Create Pie Chart (Top Performer)
 run <- function(recip, data, spek){
-  DL_LIGHT_BORDER <- "#e7edee" #takes alpha into account
-  DL_GRAY <- "#878A8F"
-  DL_BLUE <- "#00274C"
-  DL_FILL <- "#FFFFFF"
-  color_set <- c(DL_BLUE, DL_LIGHT_BORDER, DL_LIGHT_BORDER)
+  color_set <- c(PT$DL_BLUE, PT$DL_LIGHT_BORDER, PT$DL_LIGHT_BORDER)
   percentage <- "90%"
   goal <- 17/20
 
@@ -26,7 +22,8 @@ run <- function(recip, data, spek){
             panel.border=element_blank(),
             panel.grid.major=element_blank(),
             panel.grid.minor=element_blank(),
-            plot.background=element_blank())
+            plot.background=element_blank(),
+            text = element_text(family=PT$DL_FONT))
   }
 
   # Background listed twice for small section left uncompleted
@@ -46,13 +43,14 @@ run <- function(recip, data, spek){
   pie_chart <- cols +
     coord_polar(theta="y", direction=-1) +
     top_performer_theme() +
-    annotate("text", x=10, y=0, label=percentage, size=10, color=DL_BLUE) +
-    annotate("text", x=5, y=.5, label="COUNSEL RATE", size=3, color=DL_BLUE) +
-    annotate("text", x=25, y=.5, label="18/20", size=4, color=DL_BLUE) +
-    annotate("text", x=70, y=goal, label="GOAL", size=3, color=DL_BLUE) +
-    annotate("text", x=100, y=0, label="Congratulations!", size=6, color=DL_BLUE) +
-    annotate("text", x=85, y=0, label="YOU ARE A TOP PERFORMER", size=3, color=DL_BLUE) +
-    geom_segment(aes(x=40, y = goal, xend = 63, yend = goal), linetype="dashed", color=DL_GRAY)
+    dl_annotate("text", x=10, y=0, label=percentage, size=10, color=PT$DL_BLUE, fontface=2) +
+    dl_annotate("text", x=5, y=.5, label="COUNSEL RATE", size=3, color=PT$DL_BLUE) +
+    dl_annotate("text", x=25, y=.5, label="18/20", size=4, color=PT$DL_BLUE, family=PT$DL_FONT) +
+    dl_annotate("text", x=70, y=goal, label="GOAL", size=3, color=PT$DL_BLUE) +
+    dl_annotate("text", x=100, y=0, label="Congratulations!", size=6, color=PT$DL_BLUE) +
+    dl_annotate("text", x=85, y=0, label="YOU ARE A TOP PERFORMER", size=3, color=PT$DL_BLUE) +
+    geom_segment(aes(x=40, y = goal, xend = 63, yend = goal), linetype="dashed", color=PT$DL_GRAY)
 
   pie_chart
 }
+

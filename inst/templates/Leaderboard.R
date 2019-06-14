@@ -1,11 +1,6 @@
 library(ggplot2)
 library(dplyr)
-#WIP calculate rank changes
-DL_GRAY <- "#878A8F"
-DL_GREEN <- "#108A00"
-DL_RED <- "#853754"
-DL_BLUE <- "#00274C"
-DL_FILL <- "#FFFFFF"
+library(pictoralist)
 
 # Synthetic input data
 ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
@@ -29,7 +24,7 @@ calculate_delta_shape <- function(delta) {
 
 # Creates list of green, red, gray arrows
 calculate_delta_color <- function(delta) {
-  ifelse(delta==0, DL_GRAY, ifelse(delta > 0, DL_GREEN, DL_RED))
+  ifelse(delta==0, PT$DL_GRAY, ifelse(delta > 0, PT$DL_GREEN, PT$DL_RED))
 }
 
 # Plots data
@@ -37,40 +32,52 @@ make_plot <- function(plot_data) {
   plot_data %>% ggplot(aes(y=rank)) +
     leaderboard_theme() +
     geom_text(x=1, aes(y=max(rank)-rank, label=rank),
-              check_overlap=TRUE, color=DL_BLUE, hjust=0, size=3) +
+              check_overlap=TRUE, color=PT$DL_BLUE, hjust=0, size=3,
+              family=PT$DL_FONT) +
     geom_point(x=1.5, aes(y=max(rank)-rank, shape=delta_shape),
                fill=delta_color, stroke=0, size=4) +
     geom_text(x=2.1, aes(y=max(rank)-rank, label=delta_label),
-              check_overlap=TRUE, color=DL_BLUE, hjust=1, size=3, fontface="bold") +
+              check_overlap=TRUE, color=PT$DL_BLUE, hjust=1, size=3, fontface="bold",
+              family=PT$DL_FONT) +
     geom_text(x=2.5, aes(y=max(rank)-rank, label=id),
-              check_overlap=TRUE, color=DL_BLUE, hjust=0, size=3) +
+              check_overlap=TRUE, color=PT$DL_BLUE, hjust=0, size=3,
+              family=PT$DL_FONT) +
     geom_text(x=7.5, aes(y=max(rank)-rank, label=rate_label, fontface="bold"),
-              check_overlap=TRUE, color=DL_BLUE, hjust=1, size=3) +
+              check_overlap=TRUE, color=PT$DL_BLUE, hjust=1, size=3,
+              family=PT$DL_FONT) +
     geom_text(x=9, aes(y=max(rank)-rank, label=count_label),
-              check_overlap=TRUE, color=DL_BLUE, hjust=1, size=3) +
+              check_overlap=TRUE, color=PT$DL_BLUE, hjust=1, size=3,
+              family=PT$DL_FONT) +
     geom_text(x=1, aes(y=max(rank), label="RANK"),
-              color=DL_BLUE, size=3, hjust=0) +
+              color=PT$DL_BLUE, size=3, hjust=0,
+              family=PT$DL_FONT) +
     geom_text(x=2.5, aes(y=max(rank), label="CLINIC NAME"),
-              color=DL_BLUE, size=3, hjust=0) +
+              color=PT$DL_BLUE, size=3, hjust=0,
+              family=PT$DL_FONT) +
     geom_text(x=7.5, aes(y=max(rank), label="COUNSEL RATE"),
-              color=DL_BLUE, size=3, hjust=1) +
+              color=PT$DL_BLUE, size=3, hjust=1,
+              family=PT$DL_FONT) +
     geom_text(x=9, aes(y=max(rank), label="PATIENTS"),
-              color=DL_BLUE, size=3, hjust=1) +
+              color=PT$DL_BLUE, size=3, hjust=1,
+              family=PT$DL_FONT) +
     scale_x_continuous(limits=c(1,9)) +
-    geom_hline(mapping=aes(yintercept=max(rank) - 0.3), color=DL_BLUE) +
-    geom_hline(mapping=aes(yintercept=-1), color=DL_BLUE) +
+    geom_hline(mapping=aes(yintercept=max(rank) - 0.3), color=PT$DL_BLUE) +
+    geom_hline(mapping=aes(yintercept=-1), color=PT$DL_BLUE) +
     geom_text(x=1.5, aes(y=-1.3, label="UP RANK"),
-              color=DL_BLUE, size=3, hjust=0) +
+              color=PT$DL_BLUE, size=3, hjust=0,
+              family=PT$DL_FONT) +
     geom_point(x=1, aes(y=-1.3),
-               shape=24, fill=DL_GREEN, stroke=0, size=4) +
+               shape=24, fill=PT$DL_GREEN, stroke=0, size=4) +
     geom_text(x=4.5, aes(y=-1.3, label="DOWN RANK"),
-              color=DL_BLUE, size=3, hjust=0) +
+              color=PT$DL_BLUE, size=3, hjust=0,
+              family=PT$DL_FONT) +
     geom_point(x=4, aes(y=-1.3),
-               shape=25, fill=DL_RED, stroke=0, size=4) +
+               shape=25, fill=PT$DL_RED, stroke=0, size=4) +
     geom_text(x=7.5, aes(y=-1.3, label="NO CHANGE"),
-              color=DL_BLUE, size=3, hjust=0) +
+              color=PT$DL_BLUE, size=3, hjust=0,
+              family=PT$DL_FONT) +
     geom_point(x=7, aes(y=-1.3),
-               shape=23, fill=DL_GRAY, stroke=0, size=4) +
+               shape=23, fill=PT$DL_GRAY, stroke=0, size=4) +
     scale_shape_identity()
 }
 
@@ -89,7 +96,8 @@ leaderboard_theme <- function(){
           panel.border=element_blank(),
           panel.grid.major=element_blank(),
           panel.grid.minor=element_blank(),
-          plot.background=element_blank())
+          plot.background=element_blank(),
+          text = element_text(family=PT$DL_FONT))
 }
 # Avoids connection between one path to the next (lengths[4] -> lengths[5])
 ## Assemble components into input data
@@ -114,3 +122,4 @@ df <- df %>% arrange(100 - counsel_rate)
 run <- function(recipient, data, spek){
   make_plot(df)
 }
+

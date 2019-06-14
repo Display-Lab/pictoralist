@@ -1,12 +1,6 @@
 library(ggplot2)
 library(sf)
-
-# Demo for sf template
-DL_GRAY <- "#878A8F"
-DL_BLUE <- "#00274C"
-DL_LIGHT_BLUE <- "#0174BB"
-DL_FILL <- "#FFFFFF"
-DL_RED <- "#853754"
+library(pictoralist)
 
 run <- function(recipient, data, spek){
   # Get the shape frames for the outline and the slices
@@ -26,6 +20,7 @@ run <- function(recipient, data, spek){
 
   # y-axis percentages
   breaks_y <- c(0.2, 0.4, 0.6, 0.8, 1)
+  labels_y <- paste(breaks_y*100, "%", sep="")
 
   ### Add some dummy performance results as a status column
   slices[1:80, 'status'] <- 'complete'
@@ -35,23 +30,23 @@ run <- function(recipient, data, spek){
   ggplot() +
     geom_sf(aes(color=status, fill=status),
             data=slices, lwd=1, show.legend = FALSE) +
-    geom_sf(data=outline, fill=NA, lwd=2, color=DL_BLUE) +
+    geom_sf(data=outline, fill=NA, lwd=2, color=PT$DL_BLUE) +
     coord_sf(datum=NA) +
-    annotate(geom="text", x=120, y=percentage_y, label="GOAL",
-             color=DL_BLUE, size=3) +
-    annotate(geom="text", x=percentage_x, y=max_y + max_y*.20,
+    dl_annotate(geom="text", x=120, y=percentage_y, label="GOAL",
+             color=PT$DL_BLUE, size=3) +
+    dl_annotate(geom="text", x=percentage_x, y=max_y + max_y*.20,
              label=counsel_label,
-             color=DL_BLUE, size=6) +
-    annotate(geom="text", x=percentage_x, y=max_y + max_y*.1,
+             color=PT$DL_BLUE, size=6) +
+    dl_annotate(geom="text", x=percentage_x, y=max_y + max_y*.1,
              label="PATIENTS COUNSELED",
-             color=DL_BLUE, size=4) +
-    annotate(geom="text", x=percentage_x - 25, y=breaks_y*(max_y-min_y),
-             label=paste(breaks_y*100, "%", sep=""), color=DL_BLUE, size=3) +
+             color=PT$DL_BLUE, size=4) +
+    dl_annotate(geom="text", x=percentage_x - 25, y=breaks_y*(max_y-min_y),
+             label=labels_y, color=PT$DL_BLUE, size=3) +
     geom_segment(mapping=aes(x=75, y=percentage_y, xend=99, yend=percentage_y),
-                 color=DL_GRAY, linetype=2) +
-    scale_color_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
-    scale_fill_manual(values=c('complete'=DL_BLUE, 'incomplete'=DL_FILL)) +
-    theme_void()
+                 color=PT$DL_GRAY, linetype=2) +
+    scale_color_manual(values=c('complete'=PT$DL_BLUE, 'incomplete'=PT$DL_FILL)) +
+    scale_fill_manual(values=c('complete'=PT$DL_BLUE, 'incomplete'=PT$DL_FILL)) +
+    iud_theme()
 
 }
 
@@ -69,7 +64,8 @@ iud_theme <- function(){
           panel.grid.major=element_blank(),
           panel.grid.minor=element_blank(),
           panel.grid=element_blank(),
-          plot.background=element_blank())
+          plot.background=element_blank(),
+          text = element_text(family=PT$DL_FONT))
 }
 
 # Emit a sf object representing the shape outline
