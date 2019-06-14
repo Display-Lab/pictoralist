@@ -1,13 +1,14 @@
 Package: pictoralist
 Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Version: 0.0.1.0
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 Depends: R (>= 3.5.1)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Remotes: github::display-lab/spekex
+Suggests:
   testthat,
   tibble,
   mockery
@@ -16,5 +17,6 @@ Imports: dplyr,
   ggplot2,
   extrafont,
   readr,
+  spekex,
   jsonld,
-  jsonlite,
+  jsonlite
