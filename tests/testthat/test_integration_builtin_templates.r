@@ -25,10 +25,13 @@ test_that("Data provided is used in baked in Top Performer Template", {
   data_denom <- sum(recip_data[denom_colname])
   data_numer <- sum(recip_data[numer_colname])
 
-  results <- lapply(templates, FUN=function(t, recip, data, spek){t$run(recip, data, spek)},
-                    recip = "E87746", data=mtx_data, spek=mtx_spek)
-  template_denom <- results$TopPerformerGraph$data$value[1]
-  template_recip <- results$TopPerformerGraph$data$id[1]
+  tpg_env <- templates$TopPerformerGraph
+  result <- tpg_env$run("E87746", mtx_data, mtx_spek)
+
+  template_denom <- result$data$value[1]
+  template_recip <- result$data$id[1]
   expect_true(template_denom == data_denom)
   expect_true(template_recip == "E87746")
 })
+
+

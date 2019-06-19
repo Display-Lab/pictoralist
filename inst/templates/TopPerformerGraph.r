@@ -6,7 +6,6 @@ library(pictoralist)
 run <- function(recip, data, spek){
   color_set <- c(PT$DL_BLUE, PT$DL_LIGHT_BORDER, PT$DL_LIGHT_BORDER)
 
-  print(spek.measure.comparator.value)
   recip_data <- filter(data, data$practice == recip)
   denom_colname <- 'total_scripts'
   numer_colname <- 'high_dose_scripts'
@@ -14,7 +13,7 @@ run <- function(recip, data, spek){
   data_numer <- sum(recip_data[numer_colname])
 
   percentage <- paste(floor(100*(data_numer / data_denom)), "%", sep="")
-  # Blocked by bitstomach `spec.measure.comparator.value``
+  # Blocked by Display-Lab/bit-stomach#37
   goal <- .85
 
   #Removes everything except circle and annotations
