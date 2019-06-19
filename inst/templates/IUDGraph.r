@@ -3,13 +3,26 @@ library(sf)
 library(pictoralist)
 
 run <- function(recipient, data, spek){
+  denom_colname <- 'total_scripts'
+  numer_colname <- 'high_dose_scripts'
+  recip_data <- filter(data, data$practice == recipient)
+  data_denom <- sum(recip_data[denom_colname])
+  data_numer <- sum(recip_data[numer_colname])
+
+  df <- data.frame(
+    id = recipient,
+    numer = data_numer,
+    denom = data_denom,
+    value = floor(100*data_numer/data_denom)
+  )
+
   # Get the shape frames for the outline and the slices
   outline <- generate_outline()
   slices <- generate_slices()
 
   # Calculate achievable benchmark percentage
   benchmark_percentage <- 0.85
-  counsel_label <- "18 / 20"
+  counsel_label <- paste(df$numer, df$denom, sep=" / ")
   coords <- st_coordinates(outline)
   min_y <- min(coords[,'Y'])
   max_y <- max(coords[,'Y'])
@@ -23,11 +36,11 @@ run <- function(recipient, data, spek){
   labels_y <- paste(breaks_y*100, "%", sep="")
 
   ### Add some dummy performance results as a status column
-  slices[1:80, 'status'] <- 'complete'
-  slices[81:100, 'status'] <- 'incomplete'
+  slices[1:df$value, 'status'] <- 'complete'
+  slices[df$value + 1:100, 'status'] <- 'incomplete'
 
   # Plot
-  ggplot() +
+  ggplot(df) +
     geom_sf(aes(color=status, fill=status),
             data=slices, lwd=1, show.legend = FALSE) +
     geom_sf(data=outline, fill=NA, lwd=2, color=PT$DL_BLUE) +
