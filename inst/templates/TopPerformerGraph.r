@@ -5,8 +5,16 @@ library(pictoralist)
 # Create Pie Chart (Top Performer)
 run <- function(recip, data, spek){
   color_set <- c(PT$DL_BLUE, PT$DL_LIGHT_BORDER, PT$DL_LIGHT_BORDER)
-  percentage <- "90%"
-  goal <- 17/20
+
+  recip_data <- filter(data, data$practice == recip)
+  denom_colname <- 'total_scripts'
+  numer_colname <- 'high_dose_scripts'
+  data_denom <- sum(recip_data[denom_colname])
+  data_numer <- sum(recip_data[numer_colname])
+
+  percentage <- paste(floor(100*(data_numer / data_denom)), "%", sep="")
+  # Blocked by Display-Lab/bit-stomach#37
+  goal <- .85
 
   #Removes everything except circle and annotations
   top_performer_theme <- function(){
@@ -28,8 +36,9 @@ run <- function(recip, data, spek){
 
   # Background listed twice for small section left uncompleted
   df <- data.frame(
+    id = recip,
     group = c("background", "performance", "background"),
-    value = c(20, 18, 2),
+    value = c(data_denom, data_numer, data_denom - data_numer),
     ring = c(58, 50, 50),
     width = c(6,16,16)
   )
@@ -44,8 +53,8 @@ run <- function(recip, data, spek){
     coord_polar(theta="y", direction=-1) +
     top_performer_theme() +
     dl_annotate("text", x=10, y=0, label=percentage, size=10, color=PT$DL_BLUE, fontface=2) +
-    dl_annotate("text", x=5, y=.5, label="COUNSEL RATE", size=3, color=PT$DL_BLUE) +
-    dl_annotate("text", x=25, y=.5, label="18/20", size=4, color=PT$DL_BLUE, family=PT$DL_FONT) +
+    dl_annotate("text", x=7, y=.5, label="COUNSEL RATE", size=3, color=PT$DL_BLUE) +
+    dl_annotate("text", x=25, y=.5, label=paste(data_numer, data_denom, sep="/"), size=4, color=PT$DL_BLUE, family=PT$DL_FONT) +
     dl_annotate("text", x=70, y=goal, label="GOAL", size=3, color=PT$DL_BLUE) +
     dl_annotate("text", x=100, y=0, label="Congratulations!", size=6, color=PT$DL_BLUE) +
     dl_annotate("text", x=85, y=0, label="YOU ARE A TOP PERFORMER", size=3, color=PT$DL_BLUE) +
