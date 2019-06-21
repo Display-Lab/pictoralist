@@ -62,4 +62,37 @@ test_that("Data provided is used in baked in IUD Graph Template", {
   expect_true(template_denom == data_denom)
 })
 
+test_that("Data provided is used in baked in ComparisonBarGraphHOR", {
+  mtx_data <- read_data(spekex::get_data_path("mtx"))
+  mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
+
+  templates <- load_templates()
+
+  denom_colname <- 'total_quantity'
+  numer_colname <- 'total_scripts'
+  recipient <- "E84076"
+
+  compHOR_env <- templates$ComparisonBarGraphHOR
+  result <- compHOR_env$run(recipient, mtx_data, mtx_spek)
+
+  top_performers <- mtx_data %>%
+    group_by(practice) %>%
+    summarise(total_scripts = sum(total_scripts), total_quantity = sum(total_quantity)) %>%
+    mutate(percentage = round(total_scripts/total_quantity, digits=2)) %>%
+    arrange(desc(total_scripts/total_quantity)) %>%
+    select(practice, percentage) %>%
+    head(14)
+
+  # If recipient not in top 14, remove last elem and add recipient
+  if(!(recipient %in% top_performers$practice)) {
+    recip_data <- filter(mtx_data, mtx_data$practice == recipient)
+    data_denom <- sum(recip_data[denom_colname])
+    data_numer <- sum(recip_data[numer_colname])
+    top_performers <- top_performers %>% head(13) %>%
+      rbind(c(recipient, round(data_numer/data_denom, digits = 2)))
+  }
+
+  are_equal <- all(result$data$lengths == top_performers$percentage)
+  expect_true(are_equal)
+})
 
