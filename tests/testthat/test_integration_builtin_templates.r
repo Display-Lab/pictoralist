@@ -130,3 +130,59 @@ test_that("Data provided is used in baked in ComparisonBarGraphVERT", {
   expect_true(are_equal)
 })
 
+test_that("Data provided is used in baked in EnhancedLeaderboard", {
+  mtx_data <- read_data(spekex::get_data_path("mtx"))
+  mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
+
+  templates <- load_templates()
+
+  denom_colname <- 'total_quantity'
+  numer_colname <- 'total_scripts'
+  recipient <- "E84076"
+
+  enh_env <- templates$EnhancedLeaderboard
+  result <- enh_env$run(recipient, mtx_data, mtx_spek)
+
+  top_performers <- mtx_data %>%
+    group_by(practice) %>%
+    summarise(total_scripts = sum(total_scripts), total_quantity = sum(total_quantity)) %>%
+    mutate(percentage = floor(100*total_scripts/total_quantity)) %>%
+    arrange(desc(total_scripts/total_quantity)) %>%
+    select(practice, percentage, total_scripts, total_quantity) %>%
+    head(7)
+
+  numer_all_equal <- all(result$data$numer == top_performers$total_scripts)
+  denom_all_equal <- all(result$data$denom == top_performers$total_quantity)
+
+  expect_true(numer_all_equal)
+  expect_true(denom_all_equal)
+})
+
+test_that("Data provided is used in baked in Leaderboard", {
+  mtx_data <- read_data(spekex::get_data_path("mtx"))
+  mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
+
+  templates <- load_templates()
+
+  denom_colname <- 'total_quantity'
+  numer_colname <- 'total_scripts'
+  recipient <- "E84076"
+
+  lead_env <- templates$Leaderboard
+  result <- lead_env$run(recipient, mtx_data, mtx_spek)
+
+  top_performers <- mtx_data %>%
+    group_by(practice) %>%
+    summarise(total_scripts = sum(total_scripts), total_quantity = sum(total_quantity)) %>%
+    mutate(percentage = floor(100*total_scripts/total_quantity)) %>%
+    arrange(desc(total_scripts/total_quantity)) %>%
+    select(practice, percentage, total_scripts, total_quantity) %>%
+    head(7)
+
+  numer_all_equal <- all(result$data$numer == top_performers$total_scripts)
+  denom_all_equal <- all(result$data$denom == top_performers$total_quantity)
+
+  expect_true(numer_all_equal)
+  expect_true(denom_all_equal)
+})
+
