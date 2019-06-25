@@ -3,15 +3,15 @@ library(dplyr)
 library(pictoralist)
 
 # Synthetic input data
-ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
-         "DF FAMILY MEDICINE", "BHG OB GYN CLINIC",
-         "EAA OB GYN CLINIC", "FOO BAR MEDICINE",
-         "BAZ OB GYN CLINIC")
-numerators <- c(40,57,38,51,48,31,10)
-denominators <- c(40,63,49,68,65,63,65)
+#ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
+#         "DF FAMILY MEDICINE", "BHG OB GYN CLINIC",
+#         "EAA OB GYN CLINIC", "FOO BAR MEDICINE",
+#         "BAZ OB GYN CLINIC")
+#numerators <- c(40,57,38,51,48,31,10)
+#denominators <- c(40,63,49,68,65,63,65)
 delta <- c(1,-1,2,-1,0,-1,0)
 rank <- c(1,2,3,4,5,6,7)
-counsel_rate <- floor(100*(numerators/denominators))
+#counsel_rate <- floor(100*(numerators/denominators))
 
 calculate_delta_label <- function(delta) {
   ifelse(delta == 0, NA, sprintf("%+i", delta))
@@ -99,27 +99,42 @@ leaderboard_theme <- function(){
           plot.background=element_blank(),
           text = element_text(family=PT$DL_FONT))
 }
-# Avoids connection between one path to the next (lengths[4] -> lengths[5])
-## Assemble components into input data
 
+# Still contains static delta_labels and static ranks
 delta_label <- calculate_delta_label(delta)
 delta_shape <- calculate_delta_shape(delta)
 delta_color <- calculate_delta_color(delta)
-df <- data.frame(id=ids,
-                 rank=rank,
-                 delta_shape=delta_shape,
-                 delta_label=delta_label,
-                 delta_color=delta_color)
-
-# Calculate additional columns data
-df$rate_label <- mapply(paste, counsel_rate, "%")
-df$count_label <- mapply(paste, numerators, denominators, MoreArgs = list(sep="/"))
-df$id = reorder(df$id, counsel_rate)
-
-# reorders data into descending order
-df <- df %>% arrange(100 - counsel_rate)
 
 run <- function(recipient, data, spek){
+  # Avoids connection between one path to the next (lengths[4] -> lengths[5])
+  ## Assemble components into input data
+  denom_colname <- 'total_quantity'
+  numer_colname <- 'total_scripts'
+  top_performers <- data %>%
+    group_by(practice) %>%
+    summarise(total_scripts = sum(total_scripts), total_quantity = sum(total_quantity)) %>%
+    mutate(percentage = floor(100*total_scripts/total_quantity)) %>%
+    arrange(desc(total_scripts/total_quantity)) %>%
+    select(practice, percentage, total_scripts, total_quantity) %>%
+    head(7)
+
+  counsel_rate <- top_performers$percentage
+  numerators <- top_performers$total_scripts
+  denominators <- top_performers$total_quantity
+  ids <- top_performers$practice
+  df <- data.frame(id=ids,
+                   rank=rank,
+                   delta_shape=delta_shape,
+                   delta_label=delta_label,
+                   delta_color=delta_color)
+
+  # Calculate additional columns data
+  df$rate_label <- mapply(paste, counsel_rate, "%")
+  df$count_label <- mapply(paste, numerators, denominators, MoreArgs = list(sep="/"))
+  df$id = reorder(df$id, counsel_rate)
+
+  # reorders data into descending order
+  df <- df %>% arrange(100 - counsel_rate)
   make_plot(df)
 }
 
