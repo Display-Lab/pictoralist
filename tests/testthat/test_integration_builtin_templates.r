@@ -18,6 +18,19 @@ test_that("Baked in templates with single time points work with mtx data",{
   expect_true(all(is_ggplot))
 })
 
+test_that("Baked in templates with single time points work with va data",{
+  mtx_data <- read_data(spekex::get_data_path("va"))
+  mtx_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+  templates <- load_templates()
+  va_templates <- c(templates$SingleLineGraph)
+
+  results <- lapply(va_templates, FUN=function(t, recip, data, spek){t$run(recip, data, spek)},
+                    recip = "E87746", data=mtx_data, spek=mtx_spek)
+  is_ggplot <- sapply(results, function(x){"ggplot" %in% class(x)})
+  expect_true(all(is_ggplot))
+})
+
 test_that("Data provided is used in Top Performer Template", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
