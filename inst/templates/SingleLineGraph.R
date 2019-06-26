@@ -5,20 +5,8 @@ library(lubridate)
 library(pictoralist)
 
 run <- function(recipient, data, spek){
-  # Dummy input data (performers/performance)
-  # Dummy input data
-  t1 <- "2012-01-26"
-  t2 <- "2012-02-26"
-  t3 <- "2012-03-26"
-  t4 <- "2012-04-26"
-
-  achievable_benchmark_line = 0.5
-
-  # Converts year/month/date to abbreviated month names
-  date1 <- ymd(t1)
-  date2 <- ymd(t2)
-  date3 <- ymd(t3)
-  date4 <- ymd(t4)
+  # Dummy value
+  achievable_benchmark_line <- 0.5
   # Removes grid and provides correct axis style
   # (missing y-axis ticks on actual axis)
   single_line_theme <- function(){
@@ -36,9 +24,15 @@ run <- function(recipient, data, spek){
             text = element_text(family=PT$DL_FONT))
   }
   # x-axis ordered by month
-  performance <- c(0.25, 0.25, 0.4, 0.5)
-  performance_labels <- c("25/100","25/100","40/100", "50/100")
-  dates <- c(date1, date2, date3, date4)
+  performer <- data %>%
+    filter(sta6a == recipient) %>%
+    select(sta6a, report_month, documented, total)
+
+  numerator <- performer$documented
+  denominator <- performer$total
+  performance <- numerator/denominator
+  performance_labels <- paste(numerator, denominator, sep="/")
+  dates <- ymd(performer$report_month)
 
   df <- data.frame(lengths = performance,
                    labels = performance_labels,
@@ -59,22 +53,22 @@ run <- function(recipient, data, spek){
     geom_hline(yintercept = achievable_benchmark_line,
                linetype = "dashed",
                color = PT$DL_GRAY) +
+    geom_line(mapping=aes(y=lengths),
+              size=1,
+              lineend="round",
+              color=PT$DL_BLUE) +
     geom_point(mapping = aes(y = lengths + 0.07),
                size=4, color= PT$DL_BLUE, shape=18) +
     geom_label(mapping = aes(label=performance_labels),
                nudge_y = 0.1, fill=PT$DL_BLUE,
                color=PT$DL_FILL, label.r = unit(0, "lines"),
                family=PT$DL_FONT, label.size=0) +
-    geom_line(mapping=aes(y=lengths),
-              size=1,
-              lineend="round",
-              color=PT$DL_BLUE) +
     geom_point(mapping = aes(y = lengths),
                size=2, color=PT$DL_BLUE, fill=PT$DL_FILL,
                shape=21, stroke=1.2) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0),
                        breaks=breaks_y, labels = labels_y) +
-    scale_x_date(date_labels = "%b", expand=c(0.1,0))
+    scale_x_date(date_labels = "%b", expand = expand_scale(add = 12))
 
   col_graph + geom_text(mapping = aes(label="GOAL", y=achievable_benchmark_line - 0.04,
                                       x=max_date + goal_offset),

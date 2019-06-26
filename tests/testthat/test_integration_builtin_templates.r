@@ -1,18 +1,24 @@
 context("Integration test of baked in templates")
 
-test_that("Baked in templates work with mtx data",{
+test_that("Baked in templates with single time points work with mtx data",{
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
   templates <- load_templates()
+  mtx_templates <- c(templates$ComparisonBarGraphHOR,
+                     templates$ComparisonBarGraphVERT,
+                     templates$EnhancedLeaderboard,
+                     templates$Leaderboard,
+                     templates$IUDGraph,
+                     templates$TopPerformerGraph)
 
-  results <- lapply(templates, FUN=function(t, recip, data, spek){t$run(recip, data, spek)},
+  results <- lapply(mtx_templates, FUN=function(t, recip, data, spek){t$run(recip, data, spek)},
                     recip = "E87746", data=mtx_data, spek=mtx_spek)
   is_ggplot <- sapply(results, function(x){"ggplot" %in% class(x)})
   expect_true(all(is_ggplot))
 })
 
-test_that("Data provided is used in baked in Top Performer Template", {
+test_that("Data provided is used in Top Performer Template", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
@@ -38,7 +44,7 @@ test_that("Data provided is used in baked in Top Performer Template", {
   expect_true(template_recip_zero == "A81001")
 })
 
-test_that("Data provided is used in baked in IUD Graph Template", {
+test_that("Data provided is used in IUD Graph Template", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
@@ -62,7 +68,7 @@ test_that("Data provided is used in baked in IUD Graph Template", {
   expect_true(template_denom == data_denom)
 })
 
-test_that("Data provided is used in baked in ComparisonBarGraphHOR", {
+test_that("Data provided is used in ComparisonBarGraphHOR", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
@@ -96,7 +102,7 @@ test_that("Data provided is used in baked in ComparisonBarGraphHOR", {
   expect_true(are_equal)
 })
 
-test_that("Data provided is used in baked in ComparisonBarGraphVERT", {
+test_that("Data provided is used in ComparisonBarGraphVERT", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
@@ -130,7 +136,7 @@ test_that("Data provided is used in baked in ComparisonBarGraphVERT", {
   expect_true(are_equal)
 })
 
-test_that("Data provided is used in baked in EnhancedLeaderboard", {
+test_that("Data provided is used in EnhancedLeaderboard", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
@@ -158,7 +164,7 @@ test_that("Data provided is used in baked in EnhancedLeaderboard", {
   expect_true(denom_all_equal)
 })
 
-test_that("Data provided is used in baked in Leaderboard", {
+test_that("Data provided is used in Leaderboard", {
   mtx_data <- read_data(spekex::get_data_path("mtx"))
   mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
 
@@ -186,3 +192,26 @@ test_that("Data provided is used in baked in Leaderboard", {
   expect_true(denom_all_equal)
 })
 
+test_that("Data provided is used in baked in SingleLineGraph", {
+  va_data <- read_data(spekex::get_data_path("va"))
+  va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+  templates <- load_templates()
+
+  numer_colname <- 'documented'
+  denom_colname <- 'total'
+  recipient <- "6559AA"
+
+  lead_env <- templates$SingleLineGraph
+  result <- lead_env$run(recipient, va_data, va_spek)
+
+  performer <- va_data %>%
+    filter(sta6a == recipient) %>%
+    select(sta6a, report_month, documented, total)
+
+  dates <- performer$report_month
+  template_dates <- result$data$dates
+  all_equal <- all(dates == template_dates)
+
+  expect_true(all_equal)
+})
