@@ -228,3 +228,25 @@ test_that("Data provided is used in baked in SingleLineGraph", {
 
   expect_true(all_equal)
 })
+
+test_that("Data provided is used in baked in ComparisonLineGraph", {
+  va_data <- read_data(spekex::get_data_path("va"))
+  va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+  templates <- load_templates()
+
+  numer_colname <- 'documented'
+  denom_colname <- 'total'
+  recipient <- "6559AA"
+
+  cmp_lne_env <- templates$ComparisonLineGraph
+  result <- cmp_lne_env$run(recipient, va_data, va_spek)
+
+  ids <- c("4429AA", "5569AA", "5689AB", "6559AA")
+
+  ids_used_in_template <- as.character(unique(result$data$id))
+  ids_used_in_test <- c(ids[1], ids[2], ids[3], ids[4])
+  all_equal <- all(ids_used_in_template == ids_used_in_test)
+
+  expect_true(all_equal)
+})
