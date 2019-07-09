@@ -270,6 +270,7 @@ test_that("Data provided is used in baked in PairedBarGraph", {
 })
 
 test_that("Data provided is used in baked in PairedBarGraphHOR", {
+  skip("No data available for testing")
   va_data <- read_data(spekex::get_data_path("va"))
   va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
 
@@ -283,6 +284,24 @@ test_that("Data provided is used in baked in PairedBarGraphHOR", {
   result <- paired_HOR_env$run(recipient, va_data, va_spek)
   test_dates <- c("2018-02-01", "2018-03-01", "2018-04-01", "2018-05-01")
   all_equal <- all(test_dates == unique(result$data$date))
+
+  expect_true(all_equal)
+})
+
+test_that("Data provided is used in baked in SingleBarGraph", {
+  va_data <- read_data(spekex::get_data_path("va"))
+  va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+  templates <- load_templates()
+
+  numer_colname <- 'documented'
+  denom_colname <- 'total'
+  recipient <- "6559AA"
+
+  bar_env <- templates$SingleBarTemplate
+  result <- bar_env$run(recipient, va_data, va_spek)
+  test_dates <- c("2018-02-01", "2018-03-01", "2018-04-01", "2018-05-01")
+  all_equal <- all(test_dates == unique(result$data$dates))
 
   expect_true(all_equal)
 })
