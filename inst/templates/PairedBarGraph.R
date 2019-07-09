@@ -4,8 +4,6 @@ library(grid)
 library(lubridate)
 library(pictoralist)
 
-recipient_id= "a"
-
 make_plot_data <- function(input_data, recipient_id) {
   average_df <- data.frame(id=rep("average", 4),
                            numer=rep(NA, 4),
@@ -25,6 +23,19 @@ make_plot_data <- function(input_data, recipient_id) {
 }
 
 make_plot <- function(plot_data, recipient_id, goal) {
+  # y axis labels
+  breaks_y <- c(0.20, 0.4, 0.6, 0.8, 1.0)
+  labels_y <- c("20%", "40%", "60%", "80%", "100%")
+
+  # Hard-coded for now
+  achievable_benchmark_line = 0.7
+
+  # Gets date interval and adds to max for GOAL geom_text()
+  min_date <- min(plot_data$date)
+  max_date <- max(plot_data$date)
+  days_interval <- max_date - min_date
+  goal_offset <- floor(days_interval/5)
+
   pal_names <- c(recipient_id, "average")
   palette <- c(PT$DL_BLUE, PT$DL_LIGHT_BLUE)
   names(palette) <- pal_names
@@ -45,32 +56,6 @@ make_plot <- function(plot_data, recipient_id, goal) {
                       guide=FALSE)
 }
 
-# Synthetic input data
-ids <- c(rep("a",4), rep("b", 4), rep("c", 4))
-numerators <- c(60, 80, 70, 40, 70, 60, 75, 65, rep(20,4))
-denominators <- rep(100,length(ids))
-## Munge date char vector to date vector
-date_strings <- rep(c("2012-01-01", "2012-02-02", "2012-03-03", "2012-04-04"), length(unique(ids)))
-date_list <- lapply(date_strings, FUN=ymd)
-date_arr <- do.call("c", date_list)
-
-input_data <- data.frame(id=ids,
-                         numer=numerators,
-                         denom=denominators,
-                         date=date_arr)
-
-achievable_benchmark_line = 0.7
-
-# y axis labels
-breaks_y <- c(0.20, 0.4, 0.6, 0.8, 1.0)
-labels_y <- c("20%", "40%", "60%", "80%", "100%")
-
-# Gets date interval and adds to max for GOAL geom_text()
-min_date <- min(input_data$date)
-max_date <- max(input_data$date)
-days_interval <- max_date - min_date
-goal_offset <- floor(days_interval/5)
-
 # Removes grid and provides correct axis style
 # (missing y-axis ticks on actual axis)
 single_bar_theme <- function(){
@@ -88,8 +73,48 @@ single_bar_theme <- function(){
 }
 
 run <- function(recipient, data, spek){
-  plot_data <- make_plot_data(input_data, recipient_id)
+  performers <- data %>%
+    group_by(sta6a) %>%
+    summarise(documented = sum(documented), total = sum(total)) %>%
+    mutate(percentage = floor(100*documented / total)) %>%
+    arrange(desc(percentage)) %>%
+    head(2)
 
-  make_plot(plot_data, recipient_id, achievable_benchmark_line)
+  ids <- performers$sta6a
+
+  p1 <- data %>%
+    filter(sta6a == recipient) %>%
+    head(4)
+  n1 <- p1$documented
+  d1 <- p1$total
+
+  p2 <- data %>%
+    filter(sta6a == ids[1]) %>%
+    head(4)
+  n2 <- p2$documented
+  d2 <- p2$total
+
+  p3 <- data %>%
+    filter(sta6a == ids[2]) %>%
+    head(4)
+  n3 <- p3$documented
+  d3 <- p3$total
+  # Synthetic input data
+  ids <- c(rep(recipient,4), rep(ids[1], 4), rep(ids[2], 4))
+  numerators <- c(n1, n2, n3)
+  denominators <- c(d1, d2, d3)
+  ## Munge date char vector to date vector
+  date_strings <- rep(c(p1$report_month), 3)
+  date_list <- lapply(date_strings, FUN=ymd)
+  date_arr <- do.call("c", date_list)
+
+  input_data <- data.frame(id=ids,
+                           numer=numerators,
+                           denom=denominators,
+                           date=date_arr)
+
+  plot_data <- make_plot_data(input_data, recipient)
+
+  make_plot(plot_data, recipient, achievable_benchmark_line)
 }
 

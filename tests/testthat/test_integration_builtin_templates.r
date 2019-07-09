@@ -250,3 +250,39 @@ test_that("Data provided is used in baked in ComparisonLineGraph", {
 
   expect_true(all_equal)
 })
+
+test_that("Data provided is used in baked in PairedBarGraph", {
+  va_data <- read_data(spekex::get_data_path("va"))
+  va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+  templates <- load_templates()
+
+  numer_colname <- 'documented'
+  denom_colname <- 'total'
+  recipient <- "6559AA"
+
+  paired_env <- templates$PairedBarGraph
+  result <- paired_env$run(recipient, va_data, va_spek)
+  test_dates <- c("2018-02-01", "2018-03-01", "2018-04-01", "2018-05-01")
+  all_equal <- all(test_dates == unique(result$data$date))
+
+  expect_true(all_equal)
+})
+
+test_that("Data provided is used in baked in PairedBarGraphHOR", {
+  va_data <- read_data(spekex::get_data_path("va"))
+  va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+  templates <- load_templates()
+
+  numer_colname <- 'documented'
+  denom_colname <- 'total'
+  recipient <- "6559AA"
+
+  paired_HOR_env <- templates$PairedBarGraphHOR
+  result <- paired_HOR_env$run(recipient, va_data, va_spek)
+  test_dates <- c("2018-02-01", "2018-03-01", "2018-04-01", "2018-05-01")
+  all_equal <- all(test_dates == unique(result$data$date))
+
+  expect_true(all_equal)
+})
