@@ -5,23 +5,16 @@ library(lubridate)
 library(pictoralist)
 
 run <- function(recipient, data, spek){
-  # Dummy input data
-  t1 <- "2012-01-26"
-  t2 <- "2012-02-26"
-  t3 <- "2012-03-26"
-  t4 <- "2012-04-26"
+  performer <- data %>%
+    filter(sta6a == recipient) %>%
+    select(sta6a, report_month, documented, total) %>%
+    head(4)
 
-  bar1 <- 11/20
-  bar2 <- 17/30
-  bar3 <- 23/25
-  bar4 <- 19/33
-
-  # Converts year/month/date to abbreviated month names
-  date1 <- ymd(t1)
-  date2 <- ymd(t2)
-  date3 <- ymd(t3)
-  date4 <- ymd(t4)
-  dates <- c(date1, date2, date3, date4)
+  numerator <- performer$documented
+  denominator <- performer$total
+  performance <- numerator/denominator
+  performance_labels <- paste(numerator, denominator, sep="/")
+  dates <- ymd(performer$report_month)
 
   # y axis labels
   breaks_y <- c(0.20, 0.4, 0.6, 0.8, 1.0)
@@ -48,8 +41,8 @@ run <- function(recipient, data, spek){
     geom_label(mapping=mapping, data=histogram_nums, stroke=3, nudge_y = -0.05)
   }
 
-  df <- data.frame(lengths = c(bar1, bar2, bar3, bar4),
-                   labels = c("11/20", "17/30", "23/25", "19/33"),
+  df <- data.frame(lengths = performance,
+                   labels = performance_labels,
                    dates = floor_date(x=dates, unit="month"))
 
 

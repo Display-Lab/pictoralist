@@ -7,24 +7,65 @@ library(pictoralist)
 run <- function(recipient, data, spek){
   color_palette <- c(PT$DL_RED, PT$DL_LIGHT_BLUE, PT$DL_CYAN, PT$DL_ORANGE)
 
-  # Synthetic input data
-  ids <- c(rep("a",4), rep("b",4),rep("c",4),rep("d",4))
-  numerators <- c(100, 100, 90, 90, 100, 90, 70, 65, 50,60,88,85,30,30,40,60)
-  denominators <- rep(100,16)
+  performers <- data %>%
+    group_by(sta6a) %>%
+    summarise(documented = sum(documented), total = sum(total)) %>%
+    mutate(percentage = floor(100*documented / total)) %>%
+    arrange(desc(percentage)) %>%
+    head(4)
+
+  ids <- performers$sta6a
+  # Edge case recipient isn't a top performer
+  if(!(recipient %in% ids)) {
+    ids <- head(ids,3)
+    ids <- append(ids, recipient)
+  }
+
+  # Get id, performer (p), numerator (n), denominator (d)
+  repeated_ids <- c(rep(ids[1],4), rep(ids[2],4), rep(ids[3],4), rep(ids[4], 4))
+  p1 <- data %>%
+    filter(sta6a == ids[1]) %>%
+    head(4)
+  n1 <- p1$documented
+  d1 <- p1$total
+
+  p2 <- data %>%
+    filter(sta6a == ids[2]) %>%
+    head(4)
+  n2 <- p2$documented
+  d2 <- p2$total
+
+  p3 <- data %>%
+    filter(sta6a == ids[3]) %>%
+    head(4)
+  n3 <- p3$documented
+  d3 <- p3$total
+
+  p4 <- data %>%
+    filter(sta6a == ids[4]) %>%
+    head(4)
+  n4 <- p4$documented
+  d4 <- p4$total
+
   ## Munge date char vector to date vector
-  date_strings <- rep(c("2012-01-01", "2012-02-02", "2012-03-03", "2012-04-04"), 4)
+  date_strings <- c(rep(p1$report_month, 4))
   date_list <- lapply(date_strings, FUN=ymd)
   date_arr <- do.call("c", date_list)
-  performance_labels <- c("100/100","100/100","90/100", "90/100")
+
+  ## Munge numerator/ denominator to single vectors
+  numerators <- c(n1, n2, n3, n4)
+  denominators <- c(d1, d2, d3, d4)
+
+  performance_labels <- paste(numerators, denominators, sep="/")
 
   achievable_benchmark_line = 0.8
+  ids <- repeated_ids
 
-  #Group colors to ids (recipient is "a")
-  recipient <- "a"
-  non_recipients <- unique(ids[ids != "a"])
+  #Group colors to ids
+  non_recipients <- unique(ids[ids != recipient])
   modified_palette <- list()
   modified_palette[non_recipients] <- color_palette
-  modified_palette[[recipient]] <- PT$DL_BLUE
+  modified_palette[recipient] <- PT$DL_BLUE
   modified_palette <- unlist(modified_palette)
 
   # Removes grid and provides correct axis style
@@ -44,8 +85,8 @@ run <- function(recipient, data, spek){
             text = element_text(family=PT$DL_FONT))
   }
   # Calculations for label on recipient
-  show_label <- ifelse((ids == 'a'), performance_labels, NA)
-  show_arrow <- as.factor(ifelse((ids == 'a'), "show", "noshow"))
+  show_label <- ifelse((ids == recipient), performance_labels, NA)
+  show_arrow <- as.factor(ifelse((ids == recipient), "show", "noshow"))
   # Avoids connectoin between one path to the next (lengths[4] -> lengths[5])
   ## Assemble components into input data
   df <- data.frame(id=ids, numer=numerators, denom=denominators, date=date_arr)
@@ -53,7 +94,7 @@ run <- function(recipient, data, spek){
   # Calculate additional columns data
   df$lengths <- df$numer/df$denom
   df$labels <- mapply(paste, df$numer, df$denom, MoreArgs = list(sep="/"))
-  df$is_recipient <- df$id == "a"
+  df$is_recipient <- df$id == recipient
   df$recipient_label <- rep("not_recipient", nrow(df))
   df[df$is_recipient, "recipient_label"] <- "recipient"
 

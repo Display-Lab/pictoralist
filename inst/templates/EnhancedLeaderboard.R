@@ -2,21 +2,6 @@ library(ggplot2)
 library(dplyr)
 library(pictoralist)
 
-# Synthetic input data
-ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
-         "DF FAMILY MEDICINE", "BHG OB GYN CLINIC",
-         "EAA OB GYN CLINIC", "FOO BAR MEDICINE",
-         "BAZ OB GYN CLINIC")
-numerators <- c(60,49,37,30,26,19,15)
-denominators <- c(60,50,40,38,36,32,28)
-declined <- denominators - numerators
-
-counsel_rate <- floor(100*(numerators/denominators))
-declined_small <- ifelse(counsel_rate >= 85 & counsel_rate != 100, declined, NA)
-show_line <- ifelse(counsel_rate >= 85 & counsel_rate != 100, "show", "noshow")
-declined_large <- ifelse(counsel_rate < 85, declined, NA)
-
-
 # Plots data
 make_plot <- function(plot_data) {
   plot_data %>% ggplot(aes(x=id, label=id)) +
@@ -59,19 +44,40 @@ leaderboard_theme <- function(){
 # Avoids connection between one path to the next (lengths[4] -> lengths[5])
 ## Assemble components into input data
 run <- function(recipient, data, spek){
-  df <- data.frame(id=ids, numer=numerators, denom=denominators)
+  denom_colname <- 'total_quantity'
+  numer_colname <- 'total_scripts'
+
+  top_performers <- data %>%
+    group_by(practice) %>%
+    summarise(total_scripts = sum(total_scripts), total_quantity = sum(total_quantity)) %>%
+    mutate(percentage = floor(100*total_scripts/total_quantity)) %>%
+    arrange(desc(total_scripts/total_quantity)) %>%
+    select(practice, percentage, total_scripts, total_quantity) %>%
+    head(7)
+
+  df <- data.frame(id=top_performers$practice,
+                   numer=top_performers$total_scripts,
+                   denom=top_performers$total_quantity)
+
+  declined <- top_performers$total_quantity - top_performers$total_scripts
+
+  declined_small <- ifelse(top_performers$percentage >= 85 &
+                             top_performers$percentage != 100, declined, NA)
+  show_line <- ifelse(top_performers$percentage >= 85 &
+                        top_performers$percentage != 100, "show", "noshow")
+  declined_large <- ifelse(top_performers$percentage < 85, declined, NA)
 
   # Calculate additional columns data
-  df$rate_label <- mapply(paste, counsel_rate, "%")
-  df$accepted_label <- numerators
-  df$declined_label <- denominators - numerators
+  df$rate_label <- mapply(paste, top_performers$percentage, "%")
+  df$accepted_label <- top_performers$total_scripts
+  df$declined_label <- top_performers$total_quantity - top_performers$total_scripts
   df$declined_small <- declined_small
-  df$largest <- max(denominators)
+  df$largest <- max(top_performers$total_quantity)
   df$show_line <- show_line
-  df$id = reorder(df$id, counsel_rate)
+  df$id = reorder(df$id, top_performers$percentage)
 
   # reorders data into descending order
-  df <- df %>% arrange(100 - counsel_rate)
+  df <- df %>% arrange(100 - top_performers$percentage)
 
   make_plot(df)
 }
