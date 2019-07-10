@@ -2,13 +2,7 @@ library(ggplot2)
 library(dplyr)
 library(pictoralist)
 
-# Synthetic input data
-#ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
-#         "DF FAMILY MEDICINE", "BHG OB GYN CLINIC",
-#         "EAA OB GYN CLINIC", "FOO BAR MEDICINE",
-#         "BAZ OB GYN CLINIC")
-#numerators <- c(40,57,38,51,48,31,10)
-#denominators <- c(40,63,49,68,65,63,65)
+# Synthetic data used to provide position changes from previous timepoints
 delta <- c(1,-1,2,-1,0,-1,0)
 rank <- c(1,2,3,4,5,6,7)
 #counsel_rate <- floor(100*(numerators/denominators))

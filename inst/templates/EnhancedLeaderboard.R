@@ -2,21 +2,6 @@ library(ggplot2)
 library(dplyr)
 library(pictoralist)
 
-# Synthetic input data
-ids <- c("XDNU OBGYN CLINIC", "VH OB GYN CLINIC",
-         "DF FAMILY MEDICINE", "BHG OB GYN CLINIC",
-         "EAA OB GYN CLINIC", "FOO BAR MEDICINE",
-         "BAZ OB GYN CLINIC")
-#numerators <- c(60,49,37,30,26,19,15)
-#denominators <- c(60,50,40,38,36,32,28)
-#declined <- denominators - numerators
-
-#counsel_rate <- floor(100*(numerators/denominators))
-#declined_small <- ifelse(counsel_rate >= 85 & counsel_rate != 100, declined, NA)
-#show_line <- ifelse(counsel_rate >= 85 & counsel_rate != 100, "show", "noshow")
-#declined_large <- ifelse(counsel_rate < 85, declined, NA)
-
-
 # Plots data
 make_plot <- function(plot_data) {
   plot_data %>% ggplot(aes(x=id, label=id)) +

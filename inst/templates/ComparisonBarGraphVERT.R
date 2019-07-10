@@ -5,11 +5,6 @@ library(pictoralist)
 
 achievable_benchmark_line = 0.75
 
-# Below 20 annotation arrow
-#recipient_id = "XDNU WHC OB GYN CLINIC"
-# Above 20 annotation inside bar graph
-#recipient_id = "5"
-
 # Removes grid and provides correct axis style
 # (missing y-axis ticks on actual axis)
 single_bar_theme <- function(){

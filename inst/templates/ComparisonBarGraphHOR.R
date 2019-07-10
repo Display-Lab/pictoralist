@@ -3,35 +3,6 @@ library(dplyr)
 library(grid)
 library(pictoralist)
 
-
-###--------------------------------NOT BEING USED------------
-# Dummy input data (performers/performance)
-p1 <- "XDNU WHC OB GYN CLINIC"
-p2 <- "VH OB GYN CLINIC"
-p3 <- "DF FAMILY MEDICINE"
-p4 <- "BHC OB GYN CLINIC"
-p5 <- "EAA OB GYN CLINIC"
-p6 <- "ABC OB GYN CLINIC"
-p7 <- "UM MEDICINE"
-p8 <- "EX AMPLE CLINIC"
-p9 <- "EX AM MEDICINE"
-p10 <- "DNXU OB GYN CLINIC"
-p11 <- "FAM MEDICINE"
-p12 <- "STANDARD OB GYN CLINIC"
-p13 <- "FOO MEDICINE"
-p14 <- "BAR BAZ OB GYN CLINIC"
-
-#performers = c(p1, p2, p3, p4, p5, p6, p7,
-#               p8, p9, p10, p11, p12, p13, p14)
-#performance = c(0.20, 0.20, 0.20, 0.20, 0.40, 0.60, 0.70,
-#                0.80, 0.85, 0.90, 0.94, 0.97, 0.99, 1.00)
-# Below 20 annotation arrow
-#recipient_id = "XDNU WHC OB GYN CLINIC"
-# Above 20 annotation inside bar graph
-recipient_id = "FOO MEDICINE"
-
-###--------------------------------NOT BEING USED------------^
-
 achievable_benchmark_line = 0.50
 
 # Removes grid and provides correct axis style

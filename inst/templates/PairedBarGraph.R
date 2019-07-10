@@ -99,10 +99,12 @@ run <- function(recipient, data, spek){
     head(4)
   n3 <- p3$documented
   d3 <- p3$total
-  # Synthetic input data
+
+  # Input data
   ids <- c(rep(recipient,4), rep(ids[1], 4), rep(ids[2], 4))
   numerators <- c(n1, n2, n3)
   denominators <- c(d1, d2, d3)
+
   ## Munge date char vector to date vector
   date_strings <- rep(c(p1$report_month), 3)
   date_list <- lapply(date_strings, FUN=ymd)
