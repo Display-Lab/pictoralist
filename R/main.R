@@ -6,7 +6,7 @@
 #' @importFrom extrafont font_import
 #' @importFrom spekex read_spek
 #' @export
-main <- function(spek_path = NULL, data_path = NULL) {
+main <- function(spek_path = NULL, data_path = NULL, save_path = NULL) {
   # Read spek
   spek <- spekex::read_spek(spek_path)
 
@@ -28,6 +28,7 @@ main <- function(spek_path = NULL, data_path = NULL) {
   figures <- produce_plots(promoted, templates, data, spek)
 
   # Write plots to disk. TODO: issue12
+  save_plots(figures, save_path, promoted)
 
   # Don't print the return value
   invisible(NULL)
