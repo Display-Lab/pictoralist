@@ -10,10 +10,18 @@ bar <- new.env()
 bar$run <- function(data, spek){ ggplot2::ggplot() }
 dummy_templates <- list('foo'=foo, 'bar'=bar)
 
-test_that("retuns a list of ggplot objects",{
-  skip("pending")
-  dummy_data <- tibble('id'=c(a,b,c), 'val'=c(10,20,30))
-  dummy_promoted <- list()
-  dummy_templates <- list()
-  result <- produce_plots(dummy_promoted, dummy_templates, dummy_data, dummy_spek)
+va_data <- read_data(spekex::get_data_path("va"))
+va_spek <- spekex::read_spek(spekex::get_spek_path("va"))
+
+templates <- load_templates()
+
+
+
+test_that("retuns a list of ggplot objects with mtxdata",{
+  mtx_data <- read_data(spekex::get_data_path("mtx"))
+  mtx_spek <- spekex::read_spek(spekex::get_spek_path("mtx"))
+  promoted <- "E87746"
+  mtx_templates <- c(templates$TopPerformerGraph, templates$IUDGraph)
+
+  result <- produce_plots(promoted, mtx_templates, mtx_data, mtx_spek)
 })
