@@ -10,9 +10,9 @@ produce_plots <- function(promoted, templates, data, spek){
   # Strip recipient id and template id from promoted candidates
   p_ids <- lapply(promoted, FUN=`strip_performer_id`)
   t_envs <- lapply(promoted, FUN=`lookup_template`, templates=templates)
-
   result <- mapply(FUN=`run_template`, p_ids, t_envs,
                    MoreArgs = list(data=data, spek=spek), SIMPLIFY = F)
+  result[sapply(result, is.null)] <- NULL # Removes invalid templates (NULL)
   return(result)
 }
 
@@ -20,8 +20,15 @@ produce_plots <- function(promoted, templates, data, spek){
 #' @param p_id performer id.  Passed to template as recipient.
 #' @description Generate ggplot from data for the recipient
 run_template <- function(p_id, t_env, data, spek){
-  result <- t_env$run(p_id, data, spek)
-  return(result)
+  invalid_templates <- tryCatch(
+    {
+      result <- t_env$run(p_id, data, spek)
+      return(result)
+    },
+    error=function(x) {
+      message(paste("Invalid template environment", t_env, "with id", p_id, sep=' '))
+    }
+  )
 }
 
 #' @title Strip Performer Id
