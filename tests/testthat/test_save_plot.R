@@ -13,21 +13,17 @@ performer_id <- "baz"
 templates <- load_templates()
 
 test_that("templates are saved in save_path directory with .png format", {
-  save_path <- setup_tmp_dir()
+  save_path <- TMP_DIR
   save_plots(dummy_templates, save_path, performer_id)
 
   current_files <- list.files(path=save_path, pattern=".png")
   expected_files <- c("baz-bar.png", "baz-foo.png")
   do_match <- current_files == expected_files
   expect_true(all(do_match))
-  teardown_tmp_dir(save_path)
-  expect_false(dir.exists(save_path))
 })
 
 test_that("templates are saved in current directory by default", {
-  skip("tmp directory will never be NA")
-  save_path <- NA
-  save_plots(dummy_templates, save_path, performer_id)
+  save_plots(dummy_templates, TMP_DIR, performer_id)
 
   current_files <- list.files(path=getwd(), pattern=".png")
   expected_files <- c("baz-bar.png", "baz-foo.png")
