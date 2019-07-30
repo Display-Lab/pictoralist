@@ -32,3 +32,7 @@ PT$DL_LIGHT_BORDER <- "#e7edee" # used in TopPerformerGraph
 
 # Style-guide font
 PT$DL_FONT <- "Montserrat"
+
+# Template dimensions
+PT$DL_WIDTH <- 10
+PT$DL_HEIGHT <- 10

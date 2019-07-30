@@ -12,7 +12,7 @@ save_plots<- function(figures, save_path, performer_id) {
   mapply(ggsave,
          filename=paste(performer_id,"-",names(figures),".png", sep=""),
          path=save_path,
-         #width=,
-         #height=,
+         width=PT$DL_WIDTH,
+         height=PT$DL_HEIGHT,
          plot=figures)
 }
