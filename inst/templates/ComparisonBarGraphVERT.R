@@ -79,7 +79,7 @@ run <- function(recipient, data, spek){
                color=PT$DL_FILL, label.r = unit(0, "lines"),
                family=PT$DL_FONT) +
     geom_text(mapping = aes(label=show_you),
-              nudge_y = 0.14, fill=PT$DL_BLUE,
+              nudge_y = 0.14,
               size=3, family=PT$DL_FONT) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0), breaks=breaks_y, labels = labels_y) +
     scale_x_discrete(df$performers, expand=expand_scale(add=c(0.65,2)), labels = labels_x) +

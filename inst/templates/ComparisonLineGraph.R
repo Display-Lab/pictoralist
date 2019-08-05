@@ -7,7 +7,7 @@ library(pictoralist)
 run <- function(recipient, data, spek){
   color_palette <- c(PT$DL_RED, PT$DL_LIGHT_BLUE, PT$DL_CYAN, PT$DL_ORANGE)
 
-  performers <- data %>%
+    performers <- data %>%
     group_by(sta6a) %>%
     summarise(documented = sum(documented), total = sum(total)) %>%
     mutate(percentage = floor(100*documented / total)) %>%
@@ -64,7 +64,8 @@ run <- function(recipient, data, spek){
   #Group colors to ids
   non_recipients <- unique(ids[ids != recipient])
   modified_palette <- list()
-  modified_palette[non_recipients] <- color_palette
+  num_performers <- length(modified_palette[non_recipients])
+  modified_palette[non_recipients] <- head(color_palette, num_performers)
   modified_palette[recipient] <- PT$DL_BLUE
   modified_palette <- unlist(modified_palette)
 

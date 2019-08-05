@@ -41,6 +41,7 @@ run <- function(recipient, data, spek){
   # Gets date interval and adds to max for GOAL geom_text()
   min_date <- min(df$dates)
   max_date <- max(df$dates)
+
   days_interval <- max_date - min_date
   goal_offset <- floor(days_interval/10)
 
