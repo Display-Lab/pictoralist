@@ -45,17 +45,21 @@ run <- function(recipient, data, spek){
                    labels = performance_labels,
                    dates = floor_date(x=dates, unit="month"))
 
+  # Creates achievable benchmark line with correct dashed legend
+  benchmarks <- c(.70, .60, .10, .75)
+
+  # Avoids issue of goal line being superimposed over performance_labels
+  print_pos <- ifelse(df$lengths < benchmarks, "below", "above")
 
   bar_graph <- ggplot(data=df, aes(x=dates, y=lengths, label=labels)) +
     single_bar_theme() +
     geom_bar(fill=PT$DL_BLUE, stat="identity") +
-    geom_text(nudge_y = rep(-0.05,4), color=PT$DL_FILL, family=PT$DL_FONT) +
+    geom_text(nudge_y = ifelse(print_pos == "below", -0.05, 0.05),
+              color=ifelse(print_pos == "below", PT$DL_FILL, PT$DL_BLUE),
+              family=PT$DL_FONT) +
     scale_x_date(date_labels = "%b") +
     scale_y_continuous(limits=c(0,1.1), expand=c(0,0),
                        breaks=breaks_y, labels = labels_y)
-
-  # Creates achievable benchmark line with correct dashed legend
-  benchmarks <- c(.70, .60, .80, .75)
 
   bar_graph +
     geom_line(mapping=aes(y=benchmarks, linetype="GOAL"),
