@@ -13,6 +13,8 @@ create_demo_templates <- function() {
   create_template("ComparisonLineGraph","d1")
   # Enhanced leaderboard
   create_template("EnhancedLeaderboard","d1")
+  # IUD Graph
+  create_template("IUDGraph","demo")
   # Leaderboard
   create_template("Leaderboard","d1")
   # Paired bar graph (vertical)
