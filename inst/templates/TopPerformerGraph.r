@@ -52,12 +52,12 @@ run <- function(recip, data, spek){
   pie_chart <- cols +
     coord_polar(theta="y", direction=-1) +
     top_performer_theme() +
-    dl_annotate("text", x=10, y=0, label=percentage, size=10, color=PT$DL_BLUE, fontface=2) +
-    dl_annotate("text", x=7, y=.5, label="COUNSEL RATE", size=3, color=PT$DL_BLUE) +
+    dl_annotate("text", x=10, y=0, label=percentage, size=9, color=PT$DL_BLUE, fontface=2) +
+    dl_annotate("text", x=7, y=.5, label="COUNSEL RATE", size=2.5, color=PT$DL_BLUE) +
     dl_annotate("text", x=25, y=.5, label=paste(data_numer, data_denom, sep="/"), size=4, color=PT$DL_BLUE, family=PT$DL_FONT) +
-    dl_annotate("text", x=70, y=goal, label="GOAL", size=3, color=PT$DL_BLUE) +
-    dl_annotate("text", x=100, y=0, label="Congratulations!", size=6, color=PT$DL_BLUE) +
-    dl_annotate("text", x=85, y=0, label="YOU ARE A TOP PERFORMER", size=3, color=PT$DL_BLUE) +
+    dl_annotate("text", x=70, y=goal, label="GOAL", size=2, color=PT$DL_BLUE) +
+    dl_annotate("text", x=100, y=0, label="Congratulations!", size=5, color=PT$DL_BLUE) +
+    dl_annotate("text", x=85, y=0, label="YOU ARE A TOP PERFORMER", size=2.5, color=PT$DL_BLUE) +
     geom_segment(aes(x=40, y = goal, xend = 63, yend = goal), linetype="dashed", color=PT$DL_GRAY)
 
   pie_chart
