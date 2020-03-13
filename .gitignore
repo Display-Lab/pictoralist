@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 *.png
-scratch.r
+scratch*.r
 man/*
