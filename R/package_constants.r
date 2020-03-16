@@ -1,5 +1,6 @@
 # Wrap package constants up into their own env
 
+#' @export
 PT <- new.env()
 
 PT$CANDIDATE_URI     <- "http://example.com/cpo#cpo_0000053"

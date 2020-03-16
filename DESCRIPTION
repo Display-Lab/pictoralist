@@ -12,7 +12,7 @@ Suggests:
   testthat,
   tibble,
   mockery
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Imports: dplyr,
   ggplot2,
   extrafont,
