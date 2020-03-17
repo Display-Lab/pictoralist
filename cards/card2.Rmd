@@ -1,0 +1,45 @@
+---
+title: "card2"
+author: "DISPLAY Lab"
+date: "3/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readr)
+library(pictoralist)
+library(extrafont)
+
+loadfonts()
+source('card2.R')
+data <- read_csv('card2.csv')
+recipient <- 'p2'
+
+figure <- run(recipient, data, list())
+```
+
+**To:** You (Anesthesia Provider)@yourhospital.com)
+
+**From:** mpog-quality@med.umich.edu
+
+**Subject:** You have become a top performer for PONV 03
+
+\  
+\  
+
+Dear Dr. X,
+
+You reached the goal for [postoperative nausea and vomiting](https://mpog.org/files/quality/measures/ponv-03_spec.pdf) (PONV 03):
+
+![](card2-fig.png)
+
+
+\  
+
+Sincerely,
+
+The MPOG Quality Team
+
+
