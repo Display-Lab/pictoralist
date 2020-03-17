@@ -12,8 +12,7 @@ load_templates <- function(){
 }
 
 #' @title Load Templates
-#' @describeIn load_templates
-#' @description Load individual template into it's own environment
+#' @describeIn load_templates Load individual template into it's own environment
 #' @return Environment in which the template was sourced.
 #' @export
 source_template <- function(path){

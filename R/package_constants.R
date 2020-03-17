@@ -1,5 +1,5 @@
-# Wrap package constants up into their own env
-
+#' Pictoralist Package Constants
+#' @description Wrapping string constants up into their own package.
 #' @export
 PT <- new.env()
 

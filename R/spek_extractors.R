@@ -1,6 +1,5 @@
 #' @title Spek Extractor Convenience Functions
-#' @description
-
+#' @description Get the name of the id column in the data from the spek
 get_id_col_from_spek <- function(spek) {
   column_list <- get_column_list(spek)
   column_names <- sapply(column_list, FUN=get_name_of_column)
