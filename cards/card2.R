@@ -4,6 +4,8 @@ library(grid)
 library(lubridate)
 library(pictoralist)
 
+# Copy of SingleBar template
+
 run <- function(recipient, data, spek){
   # Creates achievable benchmark line with correct dashed legend
   benchmarks <- c(.90, .90, .90, .90)
