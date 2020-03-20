@@ -1,7 +1,7 @@
 ---
 title: "card2"
 author: "DISPLAY Lab"
-date: "3/13/2020"
+date: "2020-03-20"
 output: pdf_document
 ---
 
