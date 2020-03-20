@@ -8,9 +8,11 @@
 man/*
 
 # Output Formats
+*.tex
 *.pdf
 *.html
 *.png
+*.svg
 
 # Temporary hacking on stuff files
 scratch*.r
