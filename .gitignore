@@ -1,7 +1,18 @@
+# R Project housekeeping
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 
-scratch.r
+# Package build artifacts
 man/*
+
+# Output Formats
+*.tex
+*.pdf
+*.html
+*.png
+*.svg
+
+# Temporary hacking on stuff files
+scratch*.r

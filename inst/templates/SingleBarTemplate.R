@@ -46,7 +46,7 @@ run <- function(recipient, data, spek){
                    dates = floor_date(x=dates, unit="month"))
 
   # Creates achievable benchmark line with correct dashed legend
-  benchmarks <- c(.70, .60, .10, .75)
+  benchmarks <- c(.70, .60, .80, .75)
 
   # Avoids issue of goal line being superimposed over performance_labels
   print_pos <- ifelse(df$lengths < benchmarks, "below", "above")

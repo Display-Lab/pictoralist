@@ -1,0 +1,45 @@
+---
+title: "card2"
+author: "DISPLAY Lab"
+date: "2020-03-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(pictoralist)
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load the source code for the figure
+card_env <- new.env()
+source(file='card2.R', local=card_env)
+
+# Load data and define recipient
+data <- pictoralist::read_data('synth_data.csv')
+recipient <- 'p2'
+```
+
+**To:** You (Anesthesia Provider)@yourhospital.com
+
+**From:** mpog-quality@med.umich.edu
+
+**Subject:** You have reached the goal for PONV 03
+
+\  
+\  
+
+Dear Dr. X,
+
+You reached the goal for the measure of [postoperative nausea and vomiting](https://mpog.org/files/quality/measures/ponv-03_spec.pdf) (PONV 03):
+
+```{r figuregen, echo=FALSE, fig.align='center', fig.width=5, fig.height=3, fig.showtext=TRUE}
+  # Run figure generation
+  card_env$run(recipient, data, list())
+```
+
+\  
+
+Sincerely,
+
+The MPOG Quality Team
+
+

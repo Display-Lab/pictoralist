@@ -1,10 +1,10 @@
 Package: pictoralist
 Title: What the Package Does (one line, title case)
-Version: 0.0.1.0
+Version: 0.0.2.0
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Depends: R (>= 3.5.1)
-License: What license is it under?
+Depends: R (>= 3.5.0)
+License: Apache License 2.0
 Encoding: UTF-8
 LazyData: true
 Remotes: github::display-lab/spekex
@@ -12,11 +12,15 @@ Suggests:
   testthat,
   tibble,
   mockery
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Imports: dplyr,
   ggplot2,
   extrafont,
+  rappdirs,
   readr,
+  showtext,
+  sf,
   spekex,
+  sysfonts,
   jsonld,
   jsonlite

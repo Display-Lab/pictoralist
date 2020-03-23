@@ -1,3 +1,5 @@
+#' Display Lab Annotate
+#' @export
 dl_annotate <- function(geom, x = NULL, y = NULL, xmin = NULL, xmax = NULL,
                         ymin = NULL, ymax = NULL, xend = NULL, yend = NULL, ...,
                         na.rm = FALSE) {

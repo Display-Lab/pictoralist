@@ -1,0 +1,44 @@
+---
+title: "card4"
+author: "DISPLAY Lab"
+date: "2020-03-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(pictoralist)
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load data and define recipient
+# Use same performer as card 2
+data <- pictoralist::read_data('synth_data.csv')
+recipient <- 'p2'
+goal_rate <- 0.90
+
+# get most recent performance of performer
+filter <- data$id == recipient & data$time == max(data$time)
+numerator <- data[filter,'numer'][[1]]
+denominator <- data[filter,'denom'][[1]]
+# Scale goal to observed denominator.  Truncate to single decimal place
+goal_percent <- paste(100*goal_rate, "%", sep="")
+scaled_goal <- round(denominator*goal_rate, 1)
+```
+
+**To:** You (Anesthesia Provider)@yourhospital.com
+
+**From:** mpog-quality@med.umich.edu
+
+**Subject:** You have reached the goal for PONV 03
+
+\  
+\  
+
+Dear Dr. X,
+
+Your performance, `r numerator`/`r denominator`, for the measure, [postoperative nausea and vomiting](https://mpog.org/files/quality/measures/ponv-03_spec.pdf) (PONV 03), was above the goal of 90% (`r scaled_goal`/`r denominator`).
+
+\  
+
+Sincerely,
+
+The MPOG Quality Team
