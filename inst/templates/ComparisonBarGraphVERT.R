@@ -82,7 +82,7 @@ run <- function(recipient, data, spek){
               nudge_y = 0.14,
               size=3, family=PT$DL_FONT) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0), breaks=breaks_y, labels = labels_y) +
-    scale_x_discrete(df$performers, expand=expand_scale(add=c(0.65,2)), labels = labels_x) +
+    scale_x_discrete(df$performers, expand=expansion(add=c(0.65,2)), labels = labels_x) +
     scale_fill_manual(values = c(PT$DL_LIGHT_BLUE, PT$DL_BLUE)) +
     scale_shape_manual(values = c("show"=18, "noshow"=NA))
 

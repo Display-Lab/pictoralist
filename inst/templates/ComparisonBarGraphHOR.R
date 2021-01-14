@@ -75,7 +75,7 @@ run <- function(recipient, data, spek){
                family=PT$DL_FONT) +
     geom_point(mapping = aes(y = lengths + 0.07, shape=below_twenty_arrow), size=2.5, fill=PT$DL_BLUE, color=PT$DL_BLUE) +
     scale_y_continuous(limits=c(0,1.1), expand=c(0,0), breaks=breaks_y, labels = labels_y) +
-    scale_x_discrete(df$performers, expand=expand_scale(add=c(0.65,2))) +
+    scale_x_discrete(df$performers, expand=expansion(add=c(0.65,2))) +
     scale_fill_manual(values = c(PT$DL_LIGHT_BLUE, PT$DL_BLUE)) +
     scale_shape_manual(values = c("show"=23, "noshow"=NA)) +
     coord_flip()

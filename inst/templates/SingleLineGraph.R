@@ -69,7 +69,7 @@ run <- function(recipient, data, spek){
                shape=21, stroke=1.2) +
     scale_y_continuous(limits=c(0,1.15), expand=c(0,0),
                        breaks=breaks_y, labels = labels_y) +
-    scale_x_date(date_labels = "%b", expand = expand_scale(add = 12))
+    scale_x_date(date_labels = "%b", expand = expansion(add = 14))
 
   col_graph + geom_text(mapping = aes(label="GOAL", y=achievable_benchmark_line - 0.04,
                                       x=max_date + goal_offset),
